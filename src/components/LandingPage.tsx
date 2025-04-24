@@ -97,30 +97,38 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
 
         {/* Buttons Container - Item */}
         <motion.div
-          className="flex gap-4 mt-10"
+          className="flex gap-4 mt-10 items-center" // Added items-center for vertical alignment if needed
           variants={itemVariants} // Apply item variants
         >
-          {/* Resume/CV Button */}
+          {/* Resume/CV Button (Borderless with Animated Underline) */}
           <motion.a
             href="/placeholder-resume.pdf"
             download
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 border border-gray-600 rounded-md shadow-sm transition-colors duration-300 hover:border-gray-400 hover:text-gray-100"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.05)" }}
+            // Added relative and group classes
+            className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 rounded-md shadow-sm transition-colors duration-300 hover:text-gray-100"
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
             onMouseEnter={onMouseEnterInteractive}
             onMouseLeave={onMouseLeaveInteractive}
           >
             <FiDownload className="w-4 h-4" />
-            Resume/CV
+            <span>Resume/CV</span> {/* Wrap text in span if not already */}
+            {/* Animated Underline Span */}
+            <motion.span
+              className="absolute bottom-0 left-0 right-0 h-px bg-gray-100 origin-center transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+              // Optionally use layout transition if needed, but CSS transition might be sufficient
+            />
           </motion.a>
-          {/* LinkedIn Button */}
+
+          {/* LinkedIn Button (Kept Bordered Design) */}
           <motion.a
             href="https://linkedin.com/in/darrance"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 border border-gray-600 rounded-md shadow-sm transition-colors duration-300 hover:border-gray-400 hover:text-gray-100"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.05)" }}
+            // Kept border and hover background
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 border border-gray-600 rounded-md shadow-sm transition-colors duration-300 hover:border-gray-400 hover:text-gray-100 hover:bg-gray-700"
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
             onMouseEnter={onMouseEnterInteractive}
