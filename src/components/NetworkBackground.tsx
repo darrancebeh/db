@@ -6,7 +6,6 @@ import { loadSlim } from "tsparticles-slim"; // Using slim bundle
 
 const NetworkBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
-    // Load the slim version of tsparticles
     await loadSlim(engine);
   }, []);
 
@@ -18,7 +17,7 @@ const NetworkBackground = () => {
   const options = {
     background: {
       color: {
-        value: "transparent", // Keep background transparent
+        value: "transparent",
       },
     },
     fpsLimit: 60,
@@ -32,30 +31,28 @@ const NetworkBackground = () => {
         resize: true,
       },
       modes: {
-        // Bubble effect configuration (particles grow)
         bubble: {
           distance: 250, // Area of effect for bubble
-          size: 8, // Size particles expand to
-          duration: 2, // Duration of the bubble effect
+          size: 8.5, // Size particles expand to
+          duration: 3, // Duration of the bubble effect
           opacity: 0.8, // Opacity during bubble
           color: "#ffffff", // Color during bubble
         },
+
         // Connect effect configuration (draws lines between particles in hover area)
         connect: {
-          distance: 80, // Max distance between particles to connect
+          distance: 100, // Max distance between particles to connect
           links: {
             opacity: 0.6, // Opacity of the connection lines
           },
           radius: 150, // Area of effect for connection
         },
+
         // Slow effect configuration (particles slow down in hover area)
         slow: {
-          factor: 3, // Slowdown factor (higher means slower)
+          factor: 2, // Slowdown factor (higher means slower)
           radius: 200, // Area of effect for slowdown
         },
-        // Remove grab/repulse if not needed
-        // grab: { ... },
-        // repulse: { ... },
       },
     },
     particles: {
@@ -76,8 +73,9 @@ const NetworkBackground = () => {
           default: "bounce", // Keep particles on screen
         },
         random: true,
-        speed: 0.7, // Slightly increased base speed
+        speed: 0.7, // Speed of particles
         straight: false,
+        
         // Add trail effect to moving particles
         trail: {
           enable: false,
@@ -90,7 +88,7 @@ const NetworkBackground = () => {
           enable: true,
           area: 800,
         },
-        value: 70, // Adjust particle count if needed
+        value: 80, // Total particle count
       },
       opacity: {
         value: { min: 0.1, max: 0.5 }, // Opacity variation
@@ -105,7 +103,7 @@ const NetworkBackground = () => {
         type: "circle",
       },
       size: {
-        value: { min: 1, max: 4 }, // Slightly larger max size
+        value: { min: 1, max: 4 },
         animation: {
           enable: true,
           speed: 3,
@@ -122,7 +120,7 @@ const NetworkBackground = () => {
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}
-      options={options as any} // Cast needed due to complex options type
+      options={options as any}
       className="absolute top-0 left-0 w-full h-full z-0" // Ensure it's behind content
     />
   );

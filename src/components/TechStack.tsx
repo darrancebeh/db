@@ -15,7 +15,6 @@ import {
   SiTailwindcss,
   SiPostgresql,
 } from "react-icons/si";
-// Add FaNodeJs back
 import { FaReact, FaNodeJs, FaGitAlt, FaPython } from "react-icons/fa";
 import { VscSymbolMisc } from "react-icons/vsc";
 import { TbMathFunction } from "react-icons/tb";
@@ -48,7 +47,7 @@ const itemVariants = {
 };
 
 
-// Updated and reordered tech stack data (18 items)
+// Tech stack data by category (Total 18 items)
 const techStackData = [
   // AI / ML / Data Science
   { name: "TensorFlow", description: "AI/ML Framework", Icon: SiTensorflow, color: "#FF6F00" },
@@ -94,10 +93,9 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
 
       {/* **** UPDATED Background Decorative Shapes (More Obvious) **** */}
       <motion.div
-        // Increased size, opacity, reduced blur
-        className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl" // Opacity /20, blur-xl
+        className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
         animate={{
-          x: [-25, 25, -25], // Slightly larger movement
+          x: [-25, 25, -25],
           y: [-15, 15, -15],
           rotate: [0, 180, 360],
         }}
@@ -109,10 +107,9 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
         }}
       />
       <motion.div
-        // Increased size, opacity, reduced blur
-        className="absolute bottom-[20%] right-[20%] w-48 h-48 bg-purple-500/20 rounded-xl filter blur-2xl" // Opacity /20, blur-2xl
+        className="absolute bottom-[20%] right-[20%] w-48 h-48 bg-purple-500/20 rounded-xl filter blur-2xl"
         animate={{
-          x: [35, -35, 35], // Slightly larger movement
+          x: [35, -35, 35],
           y: [20, -20, 20],
           rotate: [0, -180, -360],
         }}
@@ -125,11 +122,10 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
         }}
       />
        <motion.div
-        // Increased size, opacity, reduced blur
-        className="absolute top-[30%] right-[15%] w-32 h-32 bg-pink-500/15 rounded-full filter blur-lg" // Opacity /15, blur-lg
+        className="absolute top-[30%] right-[15%] w-32 h-32 bg-pink-500/15 rounded-full filter blur-lg"
         animate={{
-          scale: [1, 1.3, 1], // Slightly larger scale change
-          opacity: [0.9, 0.6, 0.9], // Higher opacity range
+          scale: [1, 1.3, 1],
+          opacity: [0.9, 0.6, 0.9],
         }}
         transition={{
           duration: 20,
@@ -170,14 +166,13 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
           return (
             <motion.div
               key={tech.name}
-              // Adjusted padding for responsiveness
               className="flex flex-col items-center justify-center p-4 sm:p-5 bg-gray-900/60 backdrop-blur-md border border-gray-700/50 rounded-xl shadow-lg aspect-square transition-colors duration-200 hover:bg-gray-800/70"
               variants={itemVariants}
               whileHover={hoverState}
               onMouseEnter={onMouseEnterInteractive}
               onMouseLeave={onMouseLeaveInteractive}
             >
-              {/* Adjusted icon size for responsiveness */}
+              {/* Icon with dynamic colors */}
               <tech.Icon
                 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 lg:w-14 mb-2 sm:mb-3"
                 style={{ color: tech.color || "#9ca3af" }}

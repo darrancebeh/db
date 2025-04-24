@@ -4,13 +4,12 @@ import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 
-// Ensure these variants are defined correctly
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Adjust timing if needed
+      staggerChildren: 0.15,
     },
   },
 };
@@ -40,14 +39,14 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
       {/* Main Content - Container for staggered animation */}
       <motion.main
         className="flex flex-col items-center gap-4 z-10 relative"
-        variants={containerVariants} // Apply container variants
-        initial="hidden"             // Start hidden
-        animate="visible"            // Animate to visible
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
         {/* Alias - Item */}
          <motion.span
           className="text-8xl font-extrabold tracking-tighter text-gray-500 font-[family-name:var(--font-geist-mono)] mb-2 transition-colors duration-300"
-          variants={itemVariants} // Apply item variants
+          variants={itemVariants}
           whileHover={{
             color: "#e5e7eb",
             scale: 1.05,
@@ -63,7 +62,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
         {/* Name - Item */}
         <motion.h1
           className="text-6xl font-medium tracking-tight text-gray-100 transition-colors duration-300"
-          variants={itemVariants} // Apply item variants
+          variants={itemVariants}
            whileHover={{
             color: "#ffffff",
             scale: 1.03,
@@ -78,7 +77,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
         {/* Subtitle - Item */}
         <motion.p
           className="mt-4 text-xl text-gray-400 font-[family-name:var(--font-geist-mono)] transition-colors duration-300"
-          variants={itemVariants} // Apply item variants
+          variants={itemVariants}
           whileHover={{ color: "#b0b0b0" }}
           transition={{ duration: 0.2 }}
         >
@@ -88,7 +87,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
         {/* Location - Item */}
         <motion.p
           className="mt-2 text-lg text-gray-600 font-[family-name:var(--font-geist-mono)] transition-colors duration-300"
-          variants={itemVariants} // Apply item variants
+          variants={itemVariants}
            whileHover={{ color: "#9ca3af" }}
            transition={{ duration: 0.2 }}
         >
@@ -97,8 +96,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
 
         {/* Buttons Container - Item */}
         <motion.div
-          className="flex gap-4 mt-10 items-center" // Added items-center for vertical alignment if needed
-          variants={itemVariants} // Apply item variants
+          className="flex gap-4 mt-10 items-center"
+          variants={itemVariants}
         >
           {/* Resume/CV Button (Borderless with Animated Underline) */}
           <motion.a
@@ -113,17 +112,16 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             onMouseLeave={onMouseLeaveInteractive}
           >
             <FiDownload className="w-4 h-4" />
-            <span>Resume/CV</span> {/* Wrap text in span if not already */}
+            <span>Resume/CV</span>
             {/* Animated Underline Span */}
             <motion.span
               className="absolute bottom-0 left-0 right-0 h-px bg-gray-100 origin-center transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
-              // Optionally use layout transition if needed, but CSS transition might be sufficient
             />
           </motion.a>
 
           {/* LinkedIn Button (Kept Bordered Design) */}
           <motion.a
-            href="https://linkedin.com/in/darrance"
+            href="https://linkedin.com/in/darrancebeh"
             target="_blank"
             rel="noopener noreferrer"
             // Kept border and hover background
@@ -151,7 +149,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
         >
           {/* ... social icons ... */}
            <motion.a
-            href="https://github.com/yourusername"
+            href="https://github.com/darrancebeh"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
@@ -165,7 +163,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             <FiGithub className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="https://twitter.com/yourusername"
+            href="https://x.com/quant_in_my"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X Profile"
@@ -179,7 +177,7 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             <FiTwitter className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="mailto:youremail@example.com"
+            href="mailto:darrancebeh@gmail.com"
             aria-label="Send Email"
             className="text-gray-500 transition-colors duration-300 hover:text-gray-300"
             whileHover={{ scale: 1.2, y: -2 }}
@@ -191,12 +189,13 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             <FiMail className="w-6 h-6" />
           </motion.a>
         </motion.div>
+
         {/* Info Text */}
         <motion.div
           className="text-center text-xs text-gray-600 space-y-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.5 }} // Further delayed fade-in
+          transition={{ delay: 1.0, duration: 0.5 }}
         >
           <p>Background Design Emulates Astral Constellations | Best Viewed on Desktop</p>
         </motion.div>

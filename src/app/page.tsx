@@ -3,8 +3,6 @@
 import React, { useState, useEffect, useRef } from "react"; // Add useEffect, useRef
 import LandingPage from "../components/LandingPage";
 import TechStack from "../components/TechStack";
-// Import motion if you want the cursor div to have animations (optional)
-// import { motion } from "framer-motion";
 
 export default function Home() {
   // --- Lifted Cursor Logic ---
@@ -13,13 +11,11 @@ export default function Home() {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      // Ensure cursorRef.current exists before accessing style
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       }
     };
 
-    // Add listener
     window.addEventListener("mousemove", moveCursor);
 
     // Initial position off-screen (optional, helps prevent flash at 0,0)
@@ -63,20 +59,7 @@ export default function Home() {
         onMouseEnterInteractive={handleMouseEnter}
         onMouseLeaveInteractive={handleMouseLeave}
       />
-      <TechStack
-        // Pass handlers if TechStack has elements that should affect the cursor
-        // onMouseEnterInteractive={handleMouseEnter}
-        // onMouseLeaveInteractive={handleMouseLeave}
-      />
-      {/* <ContactMe
-        onMouseEnterInteractive={handleMouseEnter}
-        onMouseLeaveInteractive={handleMouseLeave}
-      /> */}
-      {/* ... other sections ... */}
+      <TechStack/>
     </main>
   );
-
-  /* Alternative: For more complex navigation between sections
-  // ... (conditional rendering logic - cursor logic would still be here) ...
-  */
 }
