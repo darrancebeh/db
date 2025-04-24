@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default to dark theme variables */
+  --background-start-rgb: 10, 10, 10; /* Darker base background */
+  --background-end-rgb: 0, 0, 0;
+  --foreground-rgb: 249, 250, 251; /* Equivalent to gray-50 */
+
+  --background: rgb(var(--background-start-rgb));
+  --foreground: rgb(var(--foreground-rgb));
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ... rest of :root and media query ... */
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-start-rgb)); /* Fallback solid color */
+  cursor: none; /* Hide the default cursor */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+/* ... @layer utilities ... */
+
+/* Keyframes for the background gradient animation */
+@keyframes gradientShift {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Remove or comment out the sparkleMove keyframes */
+/* @keyframes sparkleMove { ... } */
+
+
+/* Class to apply the animated gradient ONLY */
+.bg-gradient-animate {
+/* Single Layer: Darker Gradient */
+background: linear-gradient(-45deg, #050505, #101018, #080808, #151520, #050505);
+
+/* Define size for the single background */
+background-size: 400% 400%;
+
+/* Apply only the gradient animation */
+animation: gradientShift 10s ease infinite;
+
+/* Ensure the base color is dark */
+background-color: #050505;
+}
+
+/* Class to apply the animated gradient ONLY */
+.bg-gradient-animate {
+  /* ... existing gradient styles ... */
+  background: linear-gradient(-45deg, #050505, #101018, #080808, #151520, #050505);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite; /* Adjusted timing */
+  background-color: #050505;
+  position: relative; /* Needed for absolute positioning of pseudo-element */
+  z-index: 0; /* Ensure it's a stacking context */
+}
+
+/* Add styles for the vector lines pseudo-element */
+.bg-gradient-animate::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place behind the gradient but visible */
+
+  /* Define the line pattern using repeating gradients */
+  background-image:
+    repeating-linear-gradient(
+      45deg,                     /* Angle of first set of lines */
+      rgba(200, 200, 255, 0.04), /* Line color (very faint blue/white) */
+      rgba(200, 200, 255, 0.04) 1px, /* Line thickness */
+      transparent 1px,           /* Start of transparent space */
+      transparent 60px           /* End of transparent space (controls line density) */
+    ),
+    repeating-linear-gradient(
+      -45deg,                    /* Angle of second set of lines */
+      rgba(200, 200, 255, 0.04),
+      rgba(200, 200, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+
+  /* Optional: Add subtle animation to the lines (uncomment if desired) */
+  background-size: 200% 200%;
+  animation: moveLines 40s linear infinite;
+}
+
+/* Optional Keyframes for line movement (uncomment if desired) */
+@keyframes moveLines {
+  0% { background-position: 0 0; }
+  100% { background-position: 120px 120px; } /* Adjust distance for speed */
 }
