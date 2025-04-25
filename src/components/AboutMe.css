@@ -1,13 +1,18 @@
+/* 
+  Ensure necessary fonts like 'Dancing Script', 'Georgia', 'Consolas', 'Monaco' 
+  are imported in globals.css or layout.tsx, e.g., via Google Fonts.
+*/
+
 body {
-  cursor: none;
+  cursor: none; /* Assuming a custom cursor is implemented elsewhere */
 }
 
 button, a {
-  cursor: none;
+  cursor: none; /* Assuming a custom cursor is implemented elsewhere */
 }
 
 .image-container {
-  cursor: none;
+  cursor: none; /* Assuming a custom cursor is implemented elsewhere */
 }
 
 .about-me-container {
@@ -33,35 +38,39 @@ button, a {
   }
   
   .left-section, .right-section {
-    flex: 1; /* Each section takes half the width */
+    /* flex: 1; */ /* Remove equal flex */
     padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative; 
     z-index: 1;
-    transition: background-color 0.5s ease; /* Transition for potential section background changes */
+    transition: background-color 0.5s ease;
   }
   
   .left-section {
-    justify-content: center; /* Center items vertically */
+    flex: 0.9; /* Make left section narrower */
+    justify-content: center; 
   }
   
   .right-section {
+     flex: 1.1; /* Make right section wider */
      justify-content: center;
-     align-items: flex-start; /* Align text to the start (left) */
+     align-items: flex-start; 
+     overflow: hidden; 
   }
   
   /* Separator Line */
-  .separator-line {
+  .separator-line { 
     position: absolute;
-    left: 50%;
-    top: 15%; 
-    bottom: 15%; 
+    /* left: 50%; */ /* Adjust position based on new flex ratio */
+    left: 47%; /* Position based on flex ratio (0.9 / (0.9 + 1.1) = 0.45) */
+    top: 10%; 
+    bottom: 10%; 
     width: 3px; 
     background-color: rgba(128, 128, 128, 0.5); 
     transform: translateX(-50%);
-    transition: background-color 0.4s ease, top 0.5s ease, bottom 0.5s ease, width 0.4s ease;
+    transition: background-color 0.4s ease, top 0.5s ease, bottom 0.5s ease, width 0.4s ease, left 0.5s ease; /* Add left transition */
     z-index: 2;
     border-radius: 2px;
   }
@@ -85,8 +94,8 @@ button, a {
   
   /* Image */
   .image-container {
-    width: 350px; /* Adjust size */
-    height: 350px;
+    width: 400px; /* Adjust size */
+    height: 400px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 40px;
@@ -154,12 +163,15 @@ button, a {
     font-size: 1rem;
     font-weight: 500;
     color: #555;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
     border-radius: 20px;
     display: flex;
     align-items: center;
     line-height: 1; /* Ensure icon and text align well */
+    cursor: pointer; /* Explicitly set pointer cursor for buttons */
   }
+
+  /* Color adjustments based on state */
   .state-developer .toggle-button {
       color: #bbb;
   }
@@ -213,115 +225,143 @@ button, a {
   .state-personal .toggle-button:not(.active):hover {
       background-color: rgba(0, 0, 0, 0.06);
   }
+
+  /* Focus state for accessibility */
+  .toggle-button:focus-visible {
+    outline: 2px solid transparent; /* Remove default outline */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); /* Example focus ring, adjust color as needed */
+  }
+  .state-developer .toggle-button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.6); /* Developer theme focus ring */
+  }
+   .state-personal .toggle-button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.6); /* Personal theme focus ring */
+  }
   
   
   /* --- Right Section --- */
-  
+
+.right-section {
+  position: relative;
+  overflow: hidden; /* Add overflow hidden to clip outgoing content */
+}
+
+.content {
+  position: absolute;
+  width: calc(100% - 100px); /* Adjust if padding changed */
+  opacity: 0;
+  transform: translateY(15px); /* Start slightly lower */
+  /* Adjust transition: make opacity slightly faster */
+  transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0); /* Move to final position */
+  pointer-events: auto;
+  /* Optional: Add a slight delay to the incoming transition */
+  /* transition-delay: 0.1s; */ /* Uncomment if needed */
+}
+
+.content h2 {
+  margin-bottom: 20px;
+  font-size: 2.4em; /* Larger heading */
+  font-weight: 600;
+  transition: color 0.5s ease;
+}
+
+.content p {
+  font-size: 1.15em;
+  line-height: 1.7;
+  transition: color 0.5s ease;
+}
+
+/* Specific styles for content states */
+.personal-content h2 {
+    color: #006064; /* Slightly darker cyan for better contrast */
+    font-family: 'Georgia', serif; /* Use a serif font for a more personal feel */
+    font-weight: 500; /* Slightly less bold */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+.personal-content p {
+    color: #37474f; 
+    font-family: 'Dancing Script', cursive; /* Changed to a more creative/adventurous font */
+    letter-spacing: 0.5px; /* Slightly increase letter spacing */
+    text-align: justify; /* Justify text for a cleaner block look */
+    font-size: 1.2em; /* Slightly increase font size for better readability of script font */
+}
+
+.developer-content h2 {
+    color: #ede7f6;
+    text-shadow: 0 0 6px rgba(187, 134, 252, 0.5);
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+.developer-content p {
+    color: #bdbdbd; 
+}
+
+.state-developer .developer-content {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .about-me-container {
+    flex-direction: column;
+    min-height: auto;
+    margin: 20px;
+  }
+
+  .left-section, .right-section {
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box; 
+    flex: none; /* Reset flex basis for stacked layout */
+  }
+
   .right-section {
-    position: relative;
+    min-height: 30vh; 
+    align-items: center; 
+    text-align: center;
   }
-  
+
+  .separator-line {
+    position: relative; 
+    width: 80%;
+    height: 2px;
+    top: auto;
+    bottom: auto;
+    left: 50%; /* Center horizontally in mobile */
+    transform: translateX(-50%);
+    margin: 20px auto; /* Adjust margin as needed */
+    order: 1; 
+  }
+
   .content {
-    position: absolute;
-    width: calc(100% - 100px);
+    position: relative; /* Keep relative for mobile stacking */
+    width: 100%;
     opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
+    transform: translateY(15px); /* Apply initial transform */
+    transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* pointer-events: none; */ /* Not needed for relative */
   }
-  
   .content.visible {
     opacity: 1;
-    pointer-events: auto;
+    transform: translateY(0);
+    /* pointer-events: auto; */ /* Not needed for relative */
   }
-  
+
   .content h2 {
-    margin-bottom: 20px;
-    font-size: 2.4em; /* Larger heading */
-    font-weight: 600;
-    transition: color 0.5s ease;
+    font-size: 2em;
   }
-  
   .content p {
-    font-size: 1.15em;
-    line-height: 1.7;
-    transition: color 0.5s ease;
+    font-size: 1em;
   }
-  
-  /* Specific styles for content states */
-  .personal-content h2 {
-      color: #006064;
+
+  .image-container {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
   }
-  .personal-content p {
-      color: #37474f; 
-  }
-  
-  .developer-content h2 {
-      color: #ede7f6;
-      text-shadow: 0 0 6px rgba(187, 134, 252, 0.5);
-      font-family: 'Consolas', 'Monaco', monospace;
-  }
-  .developer-content p {
-      color: #bdbdbd; 
-  }
-  
-  .state-developer .developer-content {
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  }
-  
-  /* --- Responsive Adjustments --- */
-  @media (max-width: 768px) {
-    .about-me-container {
-      flex-direction: column;
-      min-height: auto;
-      margin: 20px;
-    }
-  
-    .left-section, .right-section {
-      padding: 30px;
-      width: 100%;
-      box-sizing: border-box; 
-    }
-  
-    .right-section {
-      min-height: 30vh; 
-      align-items: center; 
-      text-align: center;
-    }
-  
-    .separator-line {
-      position: relative; 
-      width: 80%;
-      height: 2px;
-      top: auto;
-      bottom: auto;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0 auto;
-    }
-  
-    .content {
-      position: relative; 
-      width: 100%;
-      opacity: 0; 
-    }
-    .content.visible {
-      opacity: 1;
-    }
-     .content.peek {
-      opacity: 0.25;
-    }
-  
-    .content h2 {
-      font-size: 2em;
-    }
-    .content p {
-      font-size: 1em;
-    }
-  
-    .image-container {
-      width: 150px;
-      height: 150px;
-      margin-bottom: 30px;
-    }
-  }
-  
+}

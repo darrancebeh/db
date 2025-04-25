@@ -150,15 +150,29 @@ const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
       {/* Separator Line */}
       <div className="separator-line"></div>
 
-      {/* Right Section */}
-      <div className="right-section">
+      {/* Right Section - Apply Tailwind padding and flex alignment */}
+      <div className="flex-1 p-8 md:p-12 flex flex-col justify-center relative z-10"> {/* Added padding, flex properties */}
+         {/* Use Tailwind text colors - Refined for minimalistic look */}
          <div className={`content personal-content ${isPersonalActive ? 'visible' : ''}`}>
-            <h2>About Darrance</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            {/* Adjusted heading size, weight, margin and color */}
+            <h2 className="text-2xl font-medium mb-6 text-gray-200">About Darrance</h2>
+            {/* Adjusted paragraph color and line height */}
+            <p className="text-base text-gray-400 leading-loose"> 
+              Darrance is currently pursuing a Bachelor's degree in Computer Science at Sunway University, where he has been distinguished as a top-performing student by CGPA. He has also displayed many leadership experience as a student, including being the Vice President of the Sunway Business Investment Society, and Head of Events of the Sunway Blockchain Club.
+              <br/><br/>
+              Darrance is also an active investor in the US markets, a journey he began since 2019 with a modest initial capital of RM600. Since then, he has achieved significant personal financial milestones, including funding his own university tuition. This experience was also what initially sparked his interest into Data Analysis, and subsequently Quantitative Finance and AI/ML.
+            </p>
          </div>
+         {/* Use Tailwind text colors - Refined for minimalistic look */}
          <div className={`content developer-content ${!isPersonalActive ? 'visible' : ''}`}>
-            <h2>About db</h2>
-            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+             {/* Adjusted heading size, weight, margin and color */}
+            <h2 className="text-2xl font-medium mb-6 text-gray-200">About db</h2>
+             {/* Adjusted paragraph color and line height */}
+            <p className="text-base text-gray-400 leading-loose"> 
+            db’s first exposure to programming and coding dates back to when he was 15 in 2018, when he wanted to solve math problems quicker and more efficiently. Since then, he started his journey with C++, self-taught from a YouTube video, which got him hooked into a hobby that he would continue for years throughout highschool - competitive programming. 
+            <br></br><br></br>
+            Simultaneously evolving alongside his new competitive programming hobby was his fascination of using programming for problem solving, which evolved into projects to solve very niche and specific problems, such as a data visualization and analysis tool for market data for US stocks and options to make it easier to understand big data, and random hobby projects such as Blackjack and all sorts of random stuff. Since then, his passion of problem solving and development only grew stronger.
+            </p>
          </div>
       </div>
     </div>
