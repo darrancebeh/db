@@ -3,7 +3,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
+// Import Dispatch and SetStateAction
+import { Dispatch, SetStateAction } from 'react';
 
+// Define the possible cursor variants type (can be imported from page.tsx if needed)
+type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,14 +31,27 @@ const itemVariants = {
   },
 };
 
+// Update props to include setCursorVariant
 interface LandingPageProps {
-  onMouseEnterInteractive: () => void;
-  onMouseLeaveInteractive: () => void;
+  setCursorVariant: Dispatch<SetStateAction<CursorVariant>>;
+  // Keep original props if they were used elsewhere, otherwise remove them
+  // onMouseEnterInteractive: () => void;
+  // onMouseLeaveInteractive: () => void;
 }
 
-export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInteractive }: LandingPageProps) {
+// Destructure the setCursorVariant prop
+export default function LandingPage({ setCursorVariant }: LandingPageProps) {
+  // Define handlers using setCursorVariant
+  const handleMouseEnterInteractive = () => setCursorVariant('interactive');
+  const handleMouseLeaveDefault = () => setCursorVariant('default');
+
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen p-8 font-[family-name:var(--font-geist-sans)] text-center overflow-hidden bg-gradient-animate">
+    <section
+      className="relative flex flex-col items-center justify-center min-h-screen p-8 font-[family-name:var(--font-geist-sans)] text-center overflow-hidden bg-gradient-animate"
+      // Apply default cursor logic to the whole section
+      onMouseEnter={handleMouseEnterInteractive} // Set interactive when entering section
+      onMouseLeave={handleMouseLeaveDefault}   // Reset to default when leaving section
+    >
       <NetworkBackground />
 
       {/* Main Content - Container for staggered animation */}
@@ -54,8 +71,9 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             textShadow: "0 0 8px rgba(229, 231, 235, 0.3)",
           }}
           transition={{ duration: 0.2 }}
-          onMouseEnter={onMouseEnterInteractive}
-          onMouseLeave={onMouseLeaveInteractive}
+          // Keep interactive cursor while hovering this specific element
+          onMouseEnter={handleMouseEnterInteractive}
+          onMouseLeave={handleMouseEnterInteractive} // Keep interactive if mouse moves off to another interactive element within section
         >
           db
         </motion.span>
@@ -69,8 +87,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             scale: 1.03,
           }}
           transition={{ duration: 0.2 }}
-          onMouseEnter={onMouseEnterInteractive}
-          onMouseLeave={onMouseLeaveInteractive}
+          onMouseEnter={handleMouseEnterInteractive}
+          onMouseLeave={handleMouseEnterInteractive}
         >
           Darrance Beh Heng Shek
         </motion.h1>
@@ -81,6 +99,9 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
           variants={itemVariants}
           whileHover={{ color: "#b0b0b0" }}
           transition={{ duration: 0.2 }}
+          // These non-button elements can revert to the section's default (interactive)
+          onMouseEnter={handleMouseEnterInteractive}
+          onMouseLeave={handleMouseEnterInteractive}
         >
           AI & Machine Learning | Big Data & Data Science | Cybersecurity
         </motion.p>
@@ -91,6 +112,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
           variants={itemVariants}
            whileHover={{ color: "#9ca3af" }}
            transition={{ duration: 0.2 }}
+           onMouseEnter={handleMouseEnterInteractive}
+           onMouseLeave={handleMouseEnterInteractive}
         >
           Based in Kuala Lumpur, Malaysia 🇲🇾
         </motion.p>
@@ -109,8 +132,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            onMouseEnter={onMouseEnterInteractive}
-            onMouseLeave={onMouseLeaveInteractive}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
           >
             <FiDownload className="w-4 h-4" />
             <span>Resume/CV</span>
@@ -130,8 +153,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            onMouseEnter={onMouseEnterInteractive}
-            onMouseLeave={onMouseLeaveInteractive}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
           >
             <FiLinkedin className="w-4 h-4" />
             LinkedIn
@@ -158,8 +181,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             whileHover={{ scale: 1.2, y: -2 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={onMouseEnterInteractive}
-            onMouseLeave={onMouseLeaveInteractive}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
           >
             <FiGithub className="w-6 h-6" />
           </motion.a>
@@ -172,8 +195,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             whileHover={{ scale: 1.2, y: -2 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={onMouseEnterInteractive}
-            onMouseLeave={onMouseLeaveInteractive}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
           >
             <FiTwitter className="w-6 h-6" />
           </motion.a>
@@ -184,8 +207,8 @@ export default function LandingPage({ onMouseEnterInteractive, onMouseLeaveInter
             whileHover={{ scale: 1.2, y: -2 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.15 }}
-            onMouseEnter={onMouseEnterInteractive}
-            onMouseLeave={onMouseLeaveInteractive}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
           >
             <FiMail className="w-6 h-6" />
           </motion.a>
