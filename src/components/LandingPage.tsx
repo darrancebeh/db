@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {

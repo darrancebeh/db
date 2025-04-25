@@ -1,0 +1,323 @@
+.about-me-container {
+    display: flex;
+    position: relative;
+    min-height: 70vh; 
+    width: 100%;
+    max-width: 1200px; 
+    margin: 40px auto; 
+    overflow: hidden;
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1); 
+  }
+  
+  /* State-specific styles */
+  .about-me-container.state-personal {
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  }
+  .about-me-container.state-developer {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #e0e0e0;
+  }
+  
+  .left-section, .right-section {
+    flex: 1; /* Each section takes half the width */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+    z-index: 1;
+    transition: background-color 0.5s ease; /* Transition for potential section background changes */
+  }
+  
+  .left-section {
+    justify-content: center; /* Center items vertically */
+  }
+  
+  .right-section {
+     justify-content: center;
+     align-items: flex-start; /* Align text to the start (left) */
+  }
+  
+  /* Separator Line */
+  .separator-line {
+    position: absolute;
+    left: 50%;
+    top: 15%; 
+    bottom: 15%; 
+    width: 3px; 
+    background-color: rgba(128, 128, 128, 0.5); 
+    transform: translateX(-50%);
+    transition: background-color 0.4s ease, top 0.5s ease, bottom 0.5s ease, width 0.4s ease;
+    z-index: 2;
+    border-radius: 2px;
+  }
+  
+  /* Line hover effect */
+  .about-me-container:hover .separator-line {
+    background-color: rgba(80, 80, 80, 0.7); /* Darker gray on hover */
+  }
+  
+  /* Line animation/style during state transitions/active states */
+  .about-me-container.state-developer .separator-line {
+     background-color: #bb86fc; /* Purple accent for developer state */
+     box-shadow: 0 0 8px rgba(187, 134, 252, 0.6); /* Add a subtle glow */
+  }
+  .about-me-container.state-personal .separator-line {
+     background-color: #00acc1; /* Cyan accent for personal state */
+     box-shadow: 0 0 8px rgba(0, 172, 193, 0.5); /* Add a subtle glow */
+  }
+  
+  /* --- Left Section --- */
+  
+  /* Image */
+  .image-container {
+    width: 180px; /* Adjust size */
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 40px;
+    position: relative;
+    cursor: pointer;
+    border: 5px solid transparent; /* Prepare for state-specific border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.5s ease, transform 0.3s ease;
+  }
+  .image-container:hover {
+      transform: scale(1.03);
+  }
+  
+  .state-personal .image-container {
+      border-color: #4dd0e1;
+  }
+  .state-developer .image-container {
+      border-color: #7e57c2;
+  }
+  
+  .profile-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .profile-image.fade-in {
+      opacity: 1;
+  }
+  .profile-image.fade-out {
+      opacity: 0;
+  }
+  
+  .profile-image-hover {
+      opacity: 0;
+  }
+  
+  /* Toggle Controls */
+  .toggle-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 25px;
+    padding: 6px 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .state-developer .toggle-controls {
+      border-color: rgba(187, 134, 252, 0.3);
+      background-color: rgba(0, 0, 0, 0.2);
+  }
+  .state-personal .toggle-controls {
+      border-color: rgba(0, 172, 193, 0.4);
+      background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .toggle-button {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    line-height: 1; /* Ensure icon and text align well */
+  }
+  .state-developer .toggle-button {
+      color: #bbb;
+  }
+  .state-personal .toggle-button {
+      color: #005662;
+  }
+  
+  .toggle-button svg {
+    font-size: 1.2em;
+  }
+  .toggle-button.toggle-text {
+      font-family: 'monospace', sans-serif;
+  }
+  
+  .toggle-separator {
+    color: #ccc;
+    margin: 0 6px;
+    font-weight: 100;
+    font-size: 1.2rem;
+  }
+  .state-developer .toggle-separator {
+      color: #555;
+  }
+  .state-personal .toggle-separator {
+      color: #88c8d0;
+  }
+  
+  /* Active button state */
+  .toggle-button.active {
+    transform: scale(1.05);
+  }
+  .state-personal .toggle-button.active {
+    background-color: #4dd0e1;
+    color: #004d40;
+    box-shadow: 0 2px 5px rgba(77, 208, 225, 0.4);
+  }
+  .state-developer .toggle-button.active {
+    background-color: #bb86fc;
+    color: #121212;
+    box-shadow: 0 2px 5px rgba(187, 134, 252, 0.4);
+  }
+  
+  /* Hover on non-active buttons */
+  .toggle-button:not(.active):hover {
+      background-color: rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+  }
+  .state-developer .toggle-button:not(.active):hover {
+      background-color: rgba(255, 255, 255, 0.08);
+  }
+  .state-personal .toggle-button:not(.active):hover {
+      background-color: rgba(0, 0, 0, 0.06);
+  }
+  
+  
+  /* --- Right Section --- */
+  
+  .right-section {
+    position: relative;
+  }
+  
+  .content {
+    position: absolute;
+    width: calc(100% - 100px);
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  
+  .content.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .content.peek {
+     opacity: 0.25; /* Lower opacity for sneak peek */
+     transition: opacity 0.3s ease;
+     pointer-events: none;
+  }
+  
+  .content h2 {
+    margin-bottom: 20px;
+    font-size: 2.4em; /* Larger heading */
+    font-weight: 600;
+    transition: color 0.5s ease;
+  }
+  
+  .content p {
+    font-size: 1.15em;
+    line-height: 1.7;
+    transition: color 0.5s ease;
+  }
+  
+  /* Specific styles for content states */
+  .personal-content h2 {
+      color: #006064;
+  }
+  .personal-content p {
+      color: #37474f; 
+  }
+  
+  .developer-content h2 {
+      color: #ede7f6;
+      text-shadow: 0 0 6px rgba(187, 134, 252, 0.5);
+      font-family: 'Consolas', 'Monaco', monospace;
+  }
+  .developer-content p {
+      color: #bdbdbd; 
+  }
+  
+  .state-developer .developer-content {
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 768px) {
+    .about-me-container {
+      flex-direction: column;
+      min-height: auto;
+      margin: 20px;
+    }
+  
+    .left-section, .right-section {
+      padding: 30px;
+      width: 100%;
+      box-sizing: border-box; 
+    }
+  
+    .right-section {
+      min-height: 30vh; 
+      align-items: center; 
+      text-align: center;
+    }
+  
+    .separator-line {
+      position: relative; 
+      width: 80%;
+      height: 2px;
+      top: auto;
+      bottom: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 auto;
+    }
+  
+    .content {
+      position: relative; 
+      width: 100%;
+      opacity: 0; 
+    }
+    .content.visible {
+      opacity: 1;
+    }
+     .content.peek {
+      opacity: 0.25;
+    }
+  
+    .content h2 {
+      font-size: 2em;
+    }
+    .content p {
+      font-size: 1em;
+    }
+  
+    .image-container {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 30px;
+    }
+  }
+  

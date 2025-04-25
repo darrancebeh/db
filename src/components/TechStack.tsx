@@ -14,12 +14,20 @@ import {
   SiDjango,
   SiTailwindcss,
   SiPostgresql,
+  SiTypescript,
 } from "react-icons/si";
-import { FaReact, FaNodeJs, FaGitAlt, FaPython } from "react-icons/fa";
+import { FaReact, FaGitAlt, FaPython } from "react-icons/fa";
 import { VscSymbolMisc } from "react-icons/vsc";
 import { TbMathFunction } from "react-icons/tb";
 import { BiLineChart } from "react-icons/bi";
 
+// Define the possible cursor variants type
+type CursorVariant = 'default' | 'interactive' | 'lightArea';
+
+// Define props including setCursorVariant
+interface TechStackProps {
+  setCursorVariant: (variant: CursorVariant) => void;
+}
 
 // Define animation variants
 const containerVariants = {
@@ -61,9 +69,10 @@ const techStackData = [
   { name: "Matplotlib", description: "Data Visualization", Icon: BiLineChart, color: "#11557c" },
   { name: "QuantLib", description: "Quant Library", Icon: TbMathFunction, color: "#888888" },
 
-  // Backend
+  // Backend & Language
   { name: "Django", description: "Backend Development", Icon: SiDjango, color: "#44B78B" }, // Lighter color
-  { name: "Node.js", description: "Developer Environment", Icon: FaNodeJs, color: "#339933" }, // Re-added Node.js
+  // Replaced Node.js with TypeScript
+  { name: "TypeScript", description: "The Better JavaScript", Icon: SiTypescript, color: "#3178C6" },
   { name: "Express.js", description: "Backend Development", Icon: SiExpress, color: "#FFFFFF" },
 
   // Frontend
@@ -80,18 +89,17 @@ const techStackData = [
   { name: "Figma", description: "Design Tool", Icon: SiFigma, color: "#A259FF" },
 ];
 
-// Props interface (if needed for handlers)
 interface TechStackProps {
   onMouseEnterInteractive?: () => void;
   onMouseLeaveInteractive?: () => void;
 }
 
+
+
 export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInteractive }: TechStackProps) {
   return (
     // **** ADDED relative and overflow-hidden ****
     <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden">
-
-      {/* **** UPDATED Background Decorative Shapes (More Obvious) **** */}
       <motion.div
         className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
         animate={{
@@ -177,7 +185,6 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
                 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 lg:w-14 mb-2 sm:mb-3"
                 style={{ color: tech.color || "#9ca3af" }}
               />
-              {/* Adjusted text size for responsiveness */}
               <h3 className="text-xs sm:text-base md:text-lg font-semibold text-gray-100 text-center mb-1 sm:mb-1.5">
                 {tech.name}
               </h3>
