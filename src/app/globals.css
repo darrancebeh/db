@@ -18,6 +18,14 @@ body {
   cursor: none; /* Hide the default cursor */
 }
 
+button, a {
+  cursor: none; /* Hide the default cursor */
+}
+
+.image-container {
+  cursor: none; /* Hide the default cursor */
+}
+
 
 /* ... @layer utilities ... */
 
