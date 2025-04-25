@@ -11,7 +11,7 @@ export default function Home() {
   // --- Lifted Cursor Logic ---
   const cursorRef = useRef<HTMLDivElement>(null);
   // State for cursor visibility
-  const [isCursorVisible, setIsCursorVisible] = useState(false); // State for visibility
+  const [isCursorVisible, setIsCursorVisible] = useState(true); // State for visibility
   // State for cursor appearance variant
   const [cursorVariant, setCursorVariant] = useState<CursorVariant>('default');
 

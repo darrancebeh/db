@@ -85,8 +85,8 @@ button, a {
   
   /* Image */
   .image-container {
-    width: 180px; /* Adjust size */
-    height: 180px;
+    width: 350px; /* Adjust size */
+    height: 350px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 40px;
@@ -232,12 +232,6 @@ button, a {
   .content.visible {
     opacity: 1;
     pointer-events: auto;
-  }
-  
-  .content.peek {
-     opacity: 0.25; /* Lower opacity for sneak peek */
-     transition: opacity 0.3s ease;
-     pointer-events: none;
   }
   
   .content h2 {
