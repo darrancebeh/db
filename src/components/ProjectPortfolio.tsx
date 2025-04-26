@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Import useEffect and useRef
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiArrowRight, FiX } from 'react-icons/fi';
 import './ProjectPortfolio.css';
 import { Dispatch, SetStateAction } from 'react';
-import { projects } from '../data/projects';
+import { Project, projects } from '../data/projects';
 
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
@@ -42,22 +42,54 @@ interface ProjectPortfolioProps {
 }
 
 const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant }) => {
-  const FEATURED_PROJECTS_COUNT = 3; // Number of projects to feature
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const FEATURED_PROJECTS_COUNT = 3;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalGridRef = useRef<HTMLDivElement>(null); // Ref for the scrollable grid container
 
   const handleMouseEnterInteractive = () => setCursorVariant('interactive');
   const handleMouseLeaveDefault = () => setCursorVariant('default');
 
   const openModal = () => {
     setIsModalOpen(true);
-    setCursorVariant('default'); // Reset cursor when modal opens
+    setCursorVariant('default');
   };
   const closeModal = () => setIsModalOpen(false);
 
+  // Effect to handle body scroll lock and redirect wheel events
+  useEffect(() => {
+    const body = document.body;
+    const originalOverflow = body.style.overflow;
+    const modalGridElement = modalGridRef.current;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (modalGridElement) {
+        // Prevent default window scroll
+        e.preventDefault();
+        // Manually scroll the modal grid container
+        modalGridElement.scrollTop += e.deltaY;
+      }
+    };
+
+    if (isModalOpen) {
+      body.style.overflow = 'hidden'; // Prevent body scrolling
+      // Add wheel listener to the window to capture scroll events everywhere
+      window.addEventListener('wheel', handleWheel, { passive: false });
+    } else {
+      body.style.overflow = originalOverflow; // Restore body scrolling
+    }
+
+    // Cleanup function
+    return () => {
+      body.style.overflow = originalOverflow; // Ensure restoration on unmount/close
+      // Remove the listener when modal closes or component unmounts
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [isModalOpen]); // Rerun effect when modal state changes
+
   // Define hover animation for cards
   const cardHoverAnimation = {
-    y: -6, // Slightly more lift
-    boxShadow: "0 18px 40px rgba(0, 0, 0, 0.55)", // Enhance shadow further
+    y: -6,
+    boxShadow: "0 18px 40px rgba(0, 0, 0, 0.55)",
     borderColor: "rgba(255, 255, 255, 0.3)",
     transition: { duration: 0.2 }
   };
@@ -190,8 +222,8 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
                 <FiX size={24} />
               </motion.button>
               <h2 className="modal-heading">All Projects</h2>
-              <div className="modal-grid-container">
-                {/* Reusing portfolio-grid and project-card styles */}
+              {/* Add ref to the scrollable container */}
+              <div ref={modalGridRef} className="modal-grid-container">
                 <div className="portfolio-grid">
                   {projects.map((project) => (
                     // Reusing the project card structure from above

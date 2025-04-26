@@ -222,6 +222,7 @@
 .modal-grid-container {
   overflow-y: auto; /* Enable vertical scrolling */
   flex-grow: 1; /* Allow grid container to take remaining space */
+  overscroll-behavior: contain; /* Prevent scroll chaining to body */
   /* Custom scrollbar styling (optional, webkit-based) */
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Firefox */
