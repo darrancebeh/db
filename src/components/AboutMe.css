@@ -1,5 +1,5 @@
-/* 
-  Ensure necessary fonts like 'Dancing Script', 'Georgia', 'Consolas', 'Monaco' 
+/*
+  Ensure necessary fonts like 'Dancing Script', 'Georgia', 'Consolas', 'Monaco'
   are imported in globals.css or layout.tsx, e.g., via Google Fonts.
 */
 
@@ -18,103 +18,109 @@ button, a {
 .about-me-container {
     display: flex;
     position: relative;
-    min-height: 70vh; 
+    min-height: 70vh;
     width: 100%;
-    max-width: 1200px; 
-    margin: 40px auto; 
+    max-width: 1200px;
+    margin: 60px auto; /* Increased margin */
     overflow: hidden;
-    border-radius: 15px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1); 
+    border-radius: 20px; /* Slightly larger radius */
+    /* Softer shadow */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Slightly slower transition */
   }
-  
-  /* State-specific styles */
+
+  /* State-specific styles - Refined gradients */
   .about-me-container.state-personal {
-    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+    /* Softer, slightly warmer gradient */
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   }
   .about-me-container.state-developer {
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    color: #e0e0e0;
+    /* Slightly deeper dark gradient */
+    background: linear-gradient(135deg, #2a2d30 0%, #3a3d40 100%);
+    color: #e8e8e8; /* Slightly brighter base text color */
   }
-  
+
   .left-section, .right-section {
     /* flex: 1; */ /* Remove equal flex */
-    padding: 50px;
+    padding: 60px; /* Increased padding */
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; 
+    position: relative;
     z-index: 1;
     transition: background-color 0.5s ease;
   }
-  
+
   .left-section {
     flex: 0.9; /* Make left section narrower */
-    justify-content: center; 
+    justify-content: center;
   }
-  
+
   .right-section {
      flex: 1.1; /* Make right section wider */
      justify-content: center;
-     align-items: flex-start; 
-     overflow: hidden; 
+     align-items: flex-start;
+     overflow: hidden;
   }
-  
-  /* Separator Line */
-  .separator-line { 
+
+  /* Separator Line - Thinner, refined transition */
+  .separator-line {
     position: absolute;
-    /* left: 50%; */ /* Adjust position based on new flex ratio */
     left: 47%; /* Position based on flex ratio (0.9 / (0.9 + 1.1) = 0.45) */
-    top: 10%; 
-    bottom: 10%; 
-    width: 3px; 
-    background-color: rgba(128, 128, 128, 0.5); 
+    top: 15%; /* Default vertical position/height */
+    bottom: 15%; /* Default vertical position/height */
+    width: 2px; /* Thinner line */
+    background-color: rgba(128, 128, 128, 0.3); /* Lighter initial color */
     transform: translateX(-50%);
-    transition: background-color 0.4s ease, top 0.5s ease, bottom 0.5s ease, width 0.4s ease, left 0.5s ease; /* Add left transition */
+    /* Smoother transitions */
+    transition: background-color 0.6s ease, box-shadow 0.6s ease, top 0.6s ease, bottom 0.6s ease, width 0.4s ease, left 0.5s ease;
     z-index: 2;
-    border-radius: 2px;
+    border-radius: 1px;
   }
-  
-  /* Line hover effect */
+
+  /* Line hover effect - More subtle */
   .about-me-container:hover .separator-line {
-    background-color: rgba(80, 80, 80, 0.7); /* Darker gray on hover */
+    background-color: rgba(100, 100, 100, 0.5);
   }
-  
-  /* Line animation/style during state transitions/active states */
+
+  /* Line animation/style during state transitions/active states - Refined colors/glow */
   .about-me-container.state-developer .separator-line {
-     background-color: #bb86fc; /* Purple accent for developer state */
-     box-shadow: 0 0 8px rgba(187, 134, 252, 0.6); /* Add a subtle glow */
+     background-color: #a78bfa; /* Slightly softer purple */
+     box-shadow: 0 0 10px rgba(167, 139, 250, 0.5); /* Adjusted glow */
+     top: 7%; /* Extend line vertically slightly more for developer state */
+     bottom: 7%; /* Extend line vertically slightly more for developer state */
   }
   .about-me-container.state-personal .separator-line {
-     background-color: #00acc1; /* Cyan accent for personal state */
-     box-shadow: 0 0 8px rgba(0, 172, 193, 0.5); /* Add a subtle glow */
+     background-color: #2dd4bf; /* Teal accent */
+     box-shadow: 0 0 10px rgba(45, 212, 191, 0.4); /* Adjusted glow */
+     /* No top/bottom override needed, uses default 15% */
   }
-  
+
   /* --- Left Section --- */
-  
+
   /* Image */
   .image-container {
-    width: 400px; /* Adjust size */
-    height: 400px;
+    width: 380px; /* Slightly smaller */
+    height: 380px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 40px;
     position: relative;
-    border: 5px solid transparent; /* Prepare for state-specific border */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.5s ease, transform 0.3s ease;
+    border: 4px solid transparent; /* Slightly thinner border */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+    transition: border-color 0.6s ease, transform 0.4s ease; /* Smoother transitions */
   }
   .image-container:hover {
-      transform: scale(1.03);
+      transform: scale(1.04); /* Slightly larger hover scale */
   }
-  
+
   .state-personal .image-container {
-      border-color: #4dd0e1;
+      border-color: #67e8f9; /* Lighter cyan border */
   }
   .state-developer .image-container {
-      border-color: #7e57c2;
+      border-color: #c4b5fd; /* Lighter purple border */
   }
-  
+
   .profile-image {
     display: block;
     width: 100%;
@@ -123,48 +129,50 @@ button, a {
     position: absolute;
     top: 0;
     left: 0;
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smoother fade */
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .profile-image.fade-in {
       opacity: 1;
   }
   .profile-image.fade-out {
       opacity: 0;
   }
-  
+
   .profile-image-hover {
       opacity: 0;
   }
-  
-  /* Toggle Controls */
+
+  /* Toggle Controls - Refined look */
   .toggle-controls {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(128, 128, 128, 0.3);
-    border-radius: 25px;
-    padding: 6px 8px;
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(128, 128, 128, 0.2); /* Lighter border */
+    border-radius: 30px; /* More rounded */
+    padding: 8px 10px; /* Adjust padding */
+    background-color: rgba(255, 255, 255, 0.05); /* More subtle background */
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   .state-developer .toggle-controls {
-      border-color: rgba(187, 134, 252, 0.3);
-      background-color: rgba(0, 0, 0, 0.2);
+      border-color: rgba(196, 181, 253, 0.3); /* Lighter purple border */
+      background-color: rgba(0, 0, 0, 0.25);
   }
   .state-personal .toggle-controls {
-      border-color: rgba(0, 172, 193, 0.4);
-      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(103, 232, 249, 0.4); /* Lighter cyan border */
+      background-color: rgba(255, 255, 255, 0.3); /* Slightly more opaque */
   }
-  
+
   .toggle-button {
     background: none;
     border: none;
-    padding: 8px 16px;
-    font-size: 1rem;
+    padding: 10px 20px; /* Adjust padding */
+    font-size: 0.95rem; /* Slightly smaller font */
     font-weight: 500;
     color: #555;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
-    border-radius: 20px;
+    /* Smoother transitions */
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+    border-radius: 25px; /* More rounded */
     display: flex;
     align-items: center;
     line-height: 1; /* Ensure icon and text align well */
@@ -173,57 +181,59 @@ button, a {
 
   /* Color adjustments based on state */
   .state-developer .toggle-button {
-      color: #bbb;
+      color: #c0c0c0; /* Lighter gray */
   }
   .state-personal .toggle-button {
-      color: #005662;
+      color: #083344; /* Darker cyan */
   }
-  
+
   .toggle-button svg {
     font-size: 1.2em;
   }
   .toggle-button.toggle-text {
       font-family: 'monospace', sans-serif;
   }
-  
+
   .toggle-separator {
-    color: #ccc;
-    margin: 0 6px;
+    color: #aaa; /* Lighter separator */
+    margin: 0 8px;
     font-weight: 100;
     font-size: 1.2rem;
   }
   .state-developer .toggle-separator {
-      color: #555;
+      color: #666;
   }
   .state-personal .toggle-separator {
-      color: #88c8d0;
+      color: #a5f3fc; /* Lighter cyan */
   }
-  
-  /* Active button state */
+
+  /* Active button state - Refined colors/shadows */
   .toggle-button.active {
-    transform: scale(1.05);
+    transform: scale(1.03); /* Slightly less scale */
   }
   .state-personal .toggle-button.active {
-    background-color: #4dd0e1;
-    color: #004d40;
-    box-shadow: 0 2px 5px rgba(77, 208, 225, 0.4);
+    background-color: #2dd4bf; /* Teal */
+    color: #042f2e; /* Dark teal */
+    box-shadow: 0 3px 8px rgba(45, 212, 191, 0.3); /* Adjusted shadow */
   }
   .state-developer .toggle-button.active {
-    background-color: #bb86fc;
-    color: #121212;
-    box-shadow: 0 2px 5px rgba(187, 134, 252, 0.4);
+    background-color: #a78bfa; /* Softer purple */
+    color: #2d1d57; /* Dark purple */
+    box-shadow: 0 3px 8px rgba(167, 139, 250, 0.3); /* Adjusted shadow */
   }
-  
-  /* Hover on non-active buttons */
+
+  /* Hover on non-active buttons - More subtle */
   .toggle-button:not(.active):hover {
-      background-color: rgba(0, 0, 0, 0.04);
-      transform: translateY(-1px);
+      background-color: rgba(0, 0, 0, 0.03);
+      transform: translateY(-2px); /* Slightly more lift */
   }
   .state-developer .toggle-button:not(.active):hover {
-      background-color: rgba(255, 255, 255, 0.08);
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #fff; /* Brighten text on hover */
   }
   .state-personal .toggle-button:not(.active):hover {
-      background-color: rgba(0, 0, 0, 0.06);
+      background-color: rgba(0, 0, 0, 0.04);
+      color: #000; /* Darken text on hover */
   }
 
   /* Focus state for accessibility */
@@ -232,136 +242,218 @@ button, a {
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); /* Example focus ring, adjust color as needed */
   }
   .state-developer .toggle-button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.6); /* Developer theme focus ring */
+    box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.6); /* Developer theme focus ring */
   }
    .state-personal .toggle-button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.6); /* Personal theme focus ring */
+    box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.6); /* Personal theme focus ring */
   }
-  
-  
+
   /* --- Right Section --- */
 
 .right-section {
   position: relative;
-  overflow: hidden; /* Add overflow hidden to clip outgoing content */
+  overflow: hidden; /* Keep overflow hidden */
+  /* Add a subtle inner shadow or gradient overlay based on state */
 }
 
-.content {
+/* Add pseudo-element for subtle background effect */
+.right-section::before {
+  content: '';
   position: absolute;
-  width: calc(100% - 100px); /* Adjust if padding changed */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0;
-  transform: translateY(15px); /* Start slightly lower */
-  /* Adjust transition: make opacity slightly faster */
-  transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1; /* Behind the content */
+  transition: opacity 0.8s ease-in-out;
+}
+
+.state-personal .right-section::before {
+  background: radial-gradient(circle at top right, rgba(103, 232, 249, 0.1), transparent 70%);
+  opacity: 1;
+}
+
+.state-developer .right-section::before {
+  background: radial-gradient(circle at top right, rgba(167, 139, 250, 0.1), transparent 70%);
+  opacity: 1;
+}
+
+
+.content {
+  position: absolute; /* Ensure absolute positioning for large screens */
+  /* Adjust width based on new padding */
+  width: calc(100% - 120px);
+  opacity: 0;
+  transform: translateY(20px) scale(0.98); /* Start slightly lower and smaller */
+  transform-origin: center top;
+  /* Refined transition */
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
 .content.visible {
+  /* display: block; */ /* Remove display block from base style */
   opacity: 1;
-  transform: translateY(0); /* Move to final position */
+  transform: translateY(0) scale(1); /* Move to final position and size */
   pointer-events: auto;
-  /* Optional: Add a slight delay to the incoming transition */
-  /* transition-delay: 0.1s; */ /* Uncomment if needed */
+  transition-delay: 0.1s; /* Slight delay for incoming */
 }
 
 .content h2 {
-  margin-bottom: 20px;
-  font-size: 2.4em; /* Larger heading */
-  font-weight: 600;
-  transition: color 0.5s ease;
+  /* Defined via Tailwind in TSX - Keep or move here? Let's move here */
+  font-size: 2.2rem; /* Adjust size */
+  font-weight: 500; /* Medium weight */
+  margin-bottom: 1.75rem; /* mb-7 equivalent */
+  position: relative;
+  padding-bottom: 0.5rem; /* Space for underline */
+  display: inline-block; /* Fit content width for underline */
+  transition: color 0.6s ease;
+}
+
+/* Add state-specific underlines/accents */
+.content h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 50px; /* Short underline */
+  background-color: currentColor; /* Use text color */
+  opacity: 0.6;
+  border-radius: 1.5px;
+  transition: background-color 0.6s ease, width 0.4s ease;
+}
+
+.content:hover h2::after {
+   width: 80px; /* Extend underline on hover */
 }
 
 .content p {
-  font-size: 1.15em;
-  line-height: 1.7;
-  transition: color 0.5s ease;
+  /* Defined via Tailwind in TSX - Keep or move here? Let's move here */
+  font-size: 1.1rem; /* Adjust size */
+  line-height: 1.8; /* leading-loose equivalent */
+  transition: color 0.6s ease;
 }
 
-/* Specific styles for content states */
+/* Specific styles for content states - Refined */
 .personal-content h2 {
-    color: #006064; /* Slightly darker cyan for better contrast */
-    font-family: 'Georgia', serif; /* Use a serif font for a more personal feel */
-    font-weight: 500; /* Slightly less bold */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    color: #075985; /* Deeper sky blue */
+    font-family: 'Georgia', serif;
 }
 .personal-content p {
-    color: #37474f; 
-    font-family: 'Dancing Script', cursive; /* Changed to a more creative/adventurous font */
-    letter-spacing: 0.5px; /* Slightly increase letter spacing */
-    text-align: justify; /* Justify text for a cleaner block look */
-    font-size: 1.2em; /* Slightly increase font size for better readability of script font */
+    color: #374151; /* Gray-700 */
+    font-family: 'Georgia', serif; /* Changed from Dancing Script for readability */
+    /* font-family: 'Dancing Script', cursive; */ /* Revert if script font is desired */
+    /* letter-spacing: 0.5px; */
+    text-align: left; /* Changed from justify */
+    /* font-size: 1.2em; */
 }
+.personal-content h2::after {
+    background-color: #38bdf8; /* Sky blue 400 */
+}
+
 
 .developer-content h2 {
-    color: #ede7f6;
-    text-shadow: 0 0 6px rgba(187, 134, 252, 0.5);
+    color: #e5e7eb; /* Gray-200 */
     font-family: 'Consolas', 'Monaco', monospace;
+    /* text-shadow: 0 0 8px rgba(167, 139, 250, 0.4); */ /* Removed text-shadow for cleaner look */
 }
 .developer-content p {
-    color: #bdbdbd; 
+    color: #d1d5db; /* Gray-300 */
+    font-family: 'Consolas', 'Monaco', monospace; /* Ensure monospace */
+    text-align: left; /* Changed from justify */
+    font-size: 1.05rem; /* Slightly reduced font size for better fit */
+    line-height: 1.75; /* Slightly adjusted line height */
+}
+.developer-content h2::after {
+    background-color: #a78bfa; /* Softer purple */
 }
 
-.state-developer .developer-content {
+/* Remove text-shadow from developer state for cleaner look */
+/* .state-developer .developer-content {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
+} */
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .about-me-container {
     flex-direction: column;
     min-height: auto;
-    margin: 20px;
+    margin: 30px 15px; /* Adjust margin */
+    border-radius: 15px; /* Adjust radius */
   }
 
   .left-section, .right-section {
-    padding: 30px;
+    padding: 40px 25px; /* Adjust padding */
     width: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     flex: none; /* Reset flex basis for stacked layout */
   }
 
   .right-section {
-    min-height: 30vh; 
-    align-items: center; 
+    min-height: auto; /* Remove min-height */
+    align-items: center;
     text-align: center;
   }
 
   .separator-line {
-    position: relative; 
-    width: 80%;
+    position: relative;
+    width: 70%; /* Adjust width */
     height: 2px;
     top: auto;
     bottom: auto;
     left: 50%; /* Center horizontally in mobile */
     transform: translateX(-50%);
-    margin: 20px auto; /* Adjust margin as needed */
-    order: 1; 
+    margin: 25px auto; /* Adjust margin */
+    order: 1;
+  }
+
+  /* Adjust right section pseudo-element for mobile */
+  .right-section::before {
+    background: none; /* Disable radial gradient on mobile */
   }
 
   .content {
-    position: relative; /* Keep relative for mobile stacking */
-    width: 100%;
+    position: static; /* Override absolute positioning for small screens */
+    width: 100%; /* Full width */
     opacity: 0;
-    transform: translateY(15px); /* Apply initial transform */
-    transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    /* pointer-events: none; */ /* Not needed for relative */
+    transform: translateY(15px);
+    transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none; /* Hide inactive content from layout flow */
+    pointer-events: none; /* Ensure it's not interactive when hidden */
   }
   .content.visible {
+    display: block; /* Show active content */
     opacity: 1;
     transform: translateY(0);
-    /* pointer-events: auto; */ /* Not needed for relative */
+    pointer-events: auto; /* Make it interactive when visible */
   }
 
   .content h2 {
-    font-size: 2em;
+    font-size: 1.8rem; /* Adjust size */
+    margin-bottom: 1rem; /* Adjust margin */
   }
   .content p {
-    font-size: 1em;
+    font-size: 1rem; /* Adjust size */
+    line-height: 1.7; /* Adjust line height */
   }
 
   .image-container {
-    width: 150px;
-    height: 150px;
+    width: 180px; /* Adjust size */
+    height: 180px;
     margin-bottom: 30px;
   }
+
+  .toggle-controls {
+    padding: 6px 8px; /* Adjust padding */
+  }
+  .toggle-button {
+    padding: 8px 16px; /* Adjust padding */
+  }
+}
+
+/* Add a subtle overall hover effect on the container */
+.about-me-container:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
 }
