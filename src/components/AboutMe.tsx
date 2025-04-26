@@ -135,18 +135,18 @@ const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
          <div className={`content personal-content ${isPersonalActive ? 'visible' : ''}`}>
             <h2>About Darrance</h2>
             <p>
-              Darrance is currently pursuing a Bachelor's degree in Computer Science at Sunway University, where he has been distinguished as a top-performing student by CGPA. He has also displayed many leadership experience as a student, including being the Vice President of the Sunway Business Investment Society, and Head of Events of the Sunway Blockchain Club.
+              Darrance is currently pursuing a Bachelor's degree in Computer Science at Sunway University, where he has been distinguished as a <span className="highlight-personal">top-performing student by CGPA</span>. He has also displayed many leadership experience as a student, including being the <span className="highlight-personal">Vice President of the Sunway Business Investment Society</span>, and <span className="highlight-personal">Head of Events of the Sunway Blockchain Club</span>.
               <br/><br/>
-              Darrance is also an active investor in the US markets, a journey he began since 2019 with a modest initial capital of RM600. Since then, he has achieved significant personal financial milestones, including funding his own university tuition. This experience was also what initially sparked his interest into Data Analysis, and subsequently Quantitative Finance and AI/ML.
+              Darrance is also an <span className="highlight-personal">active investor in the US markets</span>, a journey he began since 2019 with a modest initial capital of RM600. Since then, he has achieved significant personal financial milestones, including <span className="highlight-personal">funding his own university tuition</span>. This experience was also what initially sparked his interest into <span className="highlight-personal">Data Analysis</span>, and subsequently <span className="highlight-personal">Quantitative Finance</span> and <span className="highlight-personal">AI/ML</span>.
             </p>
          </div>
 
          <div className={`content developer-content ${!isPersonalActive ? 'visible' : ''}`}>
             <h2>About db</h2>
             <p>
-            db’s first exposure to programming and coding dates back to when he was 15 in 2018, when he wanted to solve math problems quicker and more efficiently. Since then, he started his journey with C++, self-taught from a YouTube video, which got him hooked into a hobby that he would continue for years throughout highschool - competitive programming.
+            db’s <span className="highlight-developer">first exposure to programming and coding dates back to when he was 15 in 2018</span>, when he wanted to solve math problems quicker and more efficiently. Since then, he started his journey with <span className="highlight-developer">C++, self-taught</span> from a YouTube video, which got him hooked into a hobby that he would continue for years throughout highschool - <span className="highlight-developer">competitive programming</span>.
             <br/><br/>
-            Simultaneously evolving alongside his new competitive programming hobby was his fascination of using programming for problem solving, which evolved into projects to solve very niche and specific problems, such as a data visualization and analysis tool for market data for US stocks and options to make it easier to understand big data, and random hobby projects such as Blackjack and all sorts of random stuff. Since then, his passion of problem solving and development only grew stronger.
+            Simultaneously evolving alongside his new competitive programming hobby was his fascination of using programming for <span className="highlight-developer">problem solving</span>, which evolved into projects to solve very niche and specific problems, such as a <span className="highlight-developer">data visualization and analysis tool for market data</span> for US stocks and options to make it easier to understand big data, and random hobby projects such as Blackjack and all sorts of random stuff. Since then, his <span className="highlight-developer">passion of problem solving and development only grew stronger</span>.
             </p>
          </div>
       </div>

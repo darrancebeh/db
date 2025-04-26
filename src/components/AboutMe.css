@@ -370,6 +370,43 @@ button, a {
     background-color: #a78bfa; /* Softer purple */
 }
 
+/* --- Text Highlighting --- */
+
+.highlight-personal,
+.highlight-developer {
+  /* Base styles for highlights */
+  font-weight: 600; /* Increased font weight to semi-bold */
+  padding: 0.1em 0.3em; /* Small padding */
+  margin: -0.1em -0.3em; /* Counteract padding to maintain flow */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: default; /* Indicate it's not interactive unless hovered */
+}
+
+.highlight-personal {
+  /* Personal theme highlight */
+  color: #065f46; /* Darker teal/emerald */
+  background-color: rgba(45, 212, 191, 0.15); /* Light teal background */
+}
+
+.highlight-developer {
+  /* Developer theme highlight */
+  color: #e9d5ff; /* Lighter purple */
+  background-color: rgba(167, 139, 250, 0.15); /* Light purple background */
+}
+
+/* Subtle hover effect for highlights */
+.highlight-personal:hover {
+  background-color: rgba(45, 212, 191, 0.3); /* Slightly stronger background */
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.2);
+}
+
+.highlight-developer:hover {
+  background-color: rgba(167, 139, 250, 0.3); /* Slightly stronger background */
+  box-shadow: 0 0 8px rgba(167, 139, 250, 0.2);
+}
+
+
 /* Remove text-shadow from developer state for cleaner look */
 /* .state-developer .developer-content {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
