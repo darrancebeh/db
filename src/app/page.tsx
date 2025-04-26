@@ -4,6 +4,7 @@ import LandingPage from "../components/LandingPage";
 import TechStack from "../components/TechStack";
 import AboutMe from "../components/AboutMe";
 import ProjectPortfolio from "../components/ProjectPortfolio";
+import Footer from "@/components/Footer";
 
 // Define the possible cursor variants
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
@@ -118,6 +119,10 @@ export default function Home() {
         setCursorVariant={setCursorVariant}
       />
       <ProjectPortfolio
+        setCursorVariant={setCursorVariant}
+      />
+
+      <Footer
         setCursorVariant={setCursorVariant}
       />
     </main>
