@@ -13,11 +13,11 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'Personal Website V1',
-    imageUrl: '/images/project1_placeholder.png',
-    description: 'The first iteration of my personal portfolio website, built with Next.js and showcasing my skills.',
-    techStack: ['Next.js', 'React', 'TypeScript', 'CSS'],
-    githubUrl: 'https://github.com/yourusername/personal-website-v1',
+    title: 'Project: {db}',
+    imageUrl: '/images/project-db-screenshot.png',
+    description: 'The current website. Project: {db} is my personal portfolio website showcasing my profile and technical skills.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/darrancebeh/db',
     livePreviewUrl: 'https://yourwebsite.com',
   },
   {
