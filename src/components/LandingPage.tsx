@@ -1,4 +1,5 @@
 "use client";
+import "./LandingPage.css";
 import React from "react";
 import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
