@@ -1,0 +1,255 @@
+/* General Portfolio Section Styling */
+.portfolio-section {
+  padding: 5rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-heading {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 4rem;
+  color: #e5e7eb;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* --- ADD PORTFOLIO GRID STYLES --- */
+.portfolio-grid {
+  display: grid;
+  /* Adjust minmax for potentially narrower cards */
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Project Card Styling (Adjustments for Grid) */
+.project-card {
+  width: 100%;
+  background: rgba(20, 20, 30, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  cursor: none;
+  color: #d1d5db;
+  /* Add display flex for vertical content flow */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-image {
+  width: 100%;
+  height: 250px; /* Increased image height for taller feel */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.project-content {
+  padding: 1.5rem 1.8rem;
+  /* Allow content to grow and push links down */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #f3f4f6;
+  font-weight: 600;
+}
+
+.project-tech-stack {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tech-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 0.35rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.project-description {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  margin-bottom: 1.8rem;
+  line-height: 1.65;
+  flex-grow: 1; /* Allow description to take up available space */
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto; /* Push links to the bottom */
+}
+
+.project-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #6b7280;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  text-align: center;
+  background-color: transparent;
+}
+
+.project-button.github {
+  color: #d1d5db;
+  border-color: #4b5563;
+}
+
+.project-button.github:hover {
+  background-color: rgba(55, 65, 81, 0.7);
+  border-color: #9ca3af;
+  color: #f9fafb;
+}
+
+.project-button.preview {
+  color: #d1d5db;
+  border-color: #4b5563;
+}
+
+.project-button.preview:hover {
+  background-color: rgba(59, 130, 246, 0.4);
+  border-color: #93c5fd;
+  color: #f9fafb;
+}
+
+/* --- ADD VIEW MORE BUTTON STYLES --- */
+.view-more-container {
+  text-align: center; /* Center the button */
+  margin-top: 3rem; /* Space above the button */
+}
+
+.project-button.view-more {
+  /* Inherits base .project-button styles */
+  padding: 0.8rem 2rem; /* Slightly larger padding */
+  font-size: 1rem;
+  border-color: #9ca3af; /* Gray 400 border */
+  color: #e5e7eb; /* Gray 200 text */
+}
+
+.project-button.view-more:hover {
+  background-color: rgba(75, 85, 99, 0.7); /* Gray 500 semi-transparent */
+  border-color: #d1d5db; /* Gray 300 border */
+  color: #f9fafb; /* Gray 50 text */
+}
+
+/* --- ADD MODAL STYLES --- */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Increased z-index significantly */
+  cursor: none; /* Apply custom cursor */
+}
+
+.modal-content {
+  background: rgba(25, 25, 35, 0.8); /* Slightly different background */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 1300px; /* Allow modal to be wider */
+  height: 85vh; /* Limit height */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: none; /* Apply custom cursor */
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #9ca3af; /* Gray 400 */
+  cursor: none; /* Apply custom cursor */
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  z-index: 1010; /* Above modal content */
+}
+
+.modal-close-button:hover {
+  color: #f3f4f6; /* Gray 100 */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-heading {
+  text-align: center;
+  font-size: 2.2rem; /* Slightly smaller than main heading */
+  margin-bottom: 2rem;
+  color: #e5e7eb;
+  font-weight: 600;
+  flex-shrink: 0; /* Prevent heading from shrinking */
+}
+
+.modal-grid-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex-grow: 1; /* Allow grid container to take remaining space */
+  /* Custom scrollbar styling (optional, webkit-based) */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Firefox */
+}
+
+.modal-grid-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-grid-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-grid-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.modal-grid-container .portfolio-grid {
+  /* Adjust grid inside modal if needed, e.g., padding */
+  padding: 0.5rem; /* Add some padding around the grid */
+  max-width: none; /* Remove max-width inherited from page */
+}
+
+/* Ensure cards inside modal also use custom cursor */
+.modal-content .project-card,
+.modal-content .project-button {
+  cursor: none;
+}

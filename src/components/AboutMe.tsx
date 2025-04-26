@@ -129,8 +129,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
       {/* Separator Line */}
       <div className="separator-line"></div>
 
-      {/* Right Section - Keep flex layout classes */}
-      <div className="right-section flex flex-col justify-center relative z-10">
+      {/* Right Section - Remove z-10 */}
+      <div className="right-section flex flex-col justify-center relative">
          {/* Content divs now only control visibility */}
          <div className={`content personal-content ${isPersonalActive ? 'visible' : ''}`}>
             <h2>About Darrance</h2>
