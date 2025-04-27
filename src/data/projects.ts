@@ -22,11 +22,11 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: 'E-commerce Platform',
-    imageUrl: '/images/project2_placeholder.png',
-    description: 'A full-stack e-commerce application featuring product listings, cart functionality, and user authentication.',
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
-    githubUrl: 'https://github.com/yourusername/ecommerce-platform',
+    title: 'Word-4-Word',
+    imageUrl: '/images/project-word4word-screenshot.png',
+    description: 'Word-4-Word is a web-based OCR application that recognizes text from handwriting drawn by users on a canvas. Preview Hosting Soon.',
+    techStack: ['Next.js', 'React', 'FastAPI', 'PaddleOCR', 'Pillow'],
+    githubUrl: 'https://github.com/darrancebeh/word4word',
   },
   {
     id: 3,
