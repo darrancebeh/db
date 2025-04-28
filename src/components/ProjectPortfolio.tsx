@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiArrowRight, FiX } from 'react-icons/fi';
 import './ProjectPortfolio.css';
 import { Dispatch, SetStateAction } from 'react';
-import { Project, projects } from '../data/projects';
+import { projects } from '../data/projects';
 
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 

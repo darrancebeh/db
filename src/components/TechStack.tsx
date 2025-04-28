@@ -17,7 +17,6 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import { FaReact, FaGitAlt, FaPython } from "react-icons/fa";
-import { VscSymbolMisc } from "react-icons/vsc";
 import { TbMathFunction } from "react-icons/tb";
 import { BiLineChart } from "react-icons/bi";
 

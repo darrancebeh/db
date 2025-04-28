@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim"; // Using slim bundle
 
 const NetworkBackground = () => {
@@ -9,10 +9,7 @@ const NetworkBackground = () => {
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {},
-    []
-  );
+  const particlesLoaded = useCallback(async () => {}, []);
 
   const options = {
     background: {
@@ -120,6 +117,7 @@ const NetworkBackground = () => {
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       options={options as any}
       className="absolute top-0 left-0 w-full h-full z-0" // Ensure it's behind content
     />
