@@ -18,15 +18,15 @@ button, a {
 .about-me-container {
     display: flex;
     position: relative;
-    min-height: 70vh;
+    /* Reduce min-height slightly */
+    min-height: 75vh;
     width: 100%;
-    max-width: 1200px;
-    margin: 60px auto; /* Increased margin */
+    max-width: 1200px; /* Keep max-width */
+    margin: 60px auto;
     overflow: hidden;
-    border-radius: 20px; /* Slightly larger radius */
-    /* Softer shadow */
+    border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Slightly slower transition */
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* State-specific styles - Refined gradients */
@@ -41,8 +41,8 @@ button, a {
   }
 
   .left-section, .right-section {
-    /* flex: 1; */ /* Remove equal flex */
-    padding: 60px; /* Increased padding */
+    /* Reduce padding */
+    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,27 +51,29 @@ button, a {
   }
 
   .left-section {
-    flex: 0.9; /* Make left section narrower */
+    /* Give less space */
+    flex: 0.8;
     justify-content: center;
   }
 
   .right-section {
-     flex: 1.1; /* Make right section wider */
+     /* Give more space */
+     flex: 1.2;
      justify-content: center;
      align-items: flex-start;
      overflow: hidden;
   }
 
-  /* Separator Line - Thinner, refined transition */
+  /* Separator Line */
   .separator-line {
     position: absolute;
-    left: 47%; /* Position based on flex ratio (0.9 / (0.9 + 1.1) = 0.45) */
-    top: 15%; /* Default vertical position/height */
-    bottom: 15%; /* Default vertical position/height */
-    width: 2px; /* Thinner line */
-    background-color: rgba(128, 128, 128, 0.3); /* Lighter initial color */
+    /* Adjust position based on new flex ratio (0.8 / (0.8 + 1.2) = 0.4) */
+    left: 40%;
+    top: 15%;
+    bottom: 15%;
+    width: 2px;
+    background-color: rgba(128, 128, 128, 0.3);
     transform: translateX(-50%);
-    /* Smoother transitions */
     transition: background-color 0.6s ease, box-shadow 0.6s ease, top 0.6s ease, bottom 0.6s ease, width 0.4s ease, left 0.5s ease;
     border-radius: 1px;
   }
@@ -83,15 +85,20 @@ button, a {
 
   /* Line animation/style during state transitions/active states - Refined colors/glow */
   .about-me-container.state-developer .separator-line {
-     background-color: #a78bfa; /* Slightly softer purple */
+     /* Slightly softer purple */
+     background-color: #a78bfa;
      box-shadow: 0 0 10px rgba(167, 139, 250, 0.5); /* Adjusted glow */
-     top: 7%; /* Extend line vertically slightly more for developer state */
-     bottom: 7%; /* Extend line vertically slightly more for developer state */
+     /* Adjust vertical extension if needed based on new height/padding */
+     top: 10%;
+     bottom: 10%;
   }
   .about-me-container.state-personal .separator-line {
-     background-color: #2dd4bf; /* Teal accent */
+     /* Teal accent */
+     background-color: #2dd4bf;
      box-shadow: 0 0 10px rgba(45, 212, 191, 0.4); /* Adjusted glow */
-     /* No top/bottom override needed, uses default 15% */
+     /* Adjust vertical extension if needed */
+     top: 10%;
+     bottom: 10%;
   }
 
   /* --- Left Section --- */
@@ -279,13 +286,12 @@ button, a {
 
 
 .content {
-  position: absolute; /* Ensure absolute positioning for large screens */
-  /* Adjust width based on new padding */
-  width: calc(100% - 120px);
+  position: absolute;
+  /* Adjust width based on new padding (50px * 2 = 100px) */
+  width: calc(100% - 100px);
   opacity: 0;
-  transform: translateY(20px) scale(0.98); /* Start slightly lower and smaller */
+  transform: translateY(20px) scale(0.98);
   transform-origin: center top;
-  /* Refined transition */
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
@@ -415,15 +421,17 @@ button, a {
   .about-me-container {
     flex-direction: column;
     min-height: auto;
-    margin: 30px 15px; /* Adjust margin */
-    border-radius: 15px; /* Adjust radius */
+    margin: 30px 15px;
+    border-radius: 15px;
+    max-width: 95%;
   }
 
   .left-section, .right-section {
-    padding: 40px 25px; /* Adjust padding */
+    /* Adjust mobile padding */
+    padding: 35px 25px;
     width: 100%;
     box-sizing: border-box;
-    flex: none; /* Reset flex basis for stacked layout */
+    flex: none;
   }
 
   .right-section {
@@ -433,6 +441,7 @@ button, a {
   }
 
   .separator-line {
+    /* ... separator styles for mobile are likely okay ... */
     position: relative;
     width: 70%; /* Adjust width */
     height: 2px;
@@ -450,8 +459,9 @@ button, a {
   }
 
   .content {
-    position: static; /* Override absolute positioning for small screens */
-    width: 100%; /* Full width */
+    position: static;
+    width: 100%;
+    /* Adjust width calculation is not needed here as padding is handled by parent */
     opacity: 0;
     transform: translateY(15px);
     transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);

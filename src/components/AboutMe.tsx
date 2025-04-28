@@ -9,7 +9,8 @@ type ProfileState = 'personal' | 'developer';
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
 const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
-  const [activeState, setActiveState] = useState<ProfileState>('personal');
+  // Change the initial state from 'personal' to 'developer'
+  const [activeState, setActiveState] = useState<ProfileState>('developer');
   const [isHoveringImage, setIsHoveringImage] = useState(false);
   const [isMouseInside, setIsMouseInside] = useState(false);
   const [allowHoverEffect, setAllowHoverEffect] = useState(true);
