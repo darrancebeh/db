@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description: 'The current website. Project: {db} is my personal portfolio website showcasing my profile and technical skills.',
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     githubUrl: 'https://github.com/darrancebeh/db',
-    livePreviewUrl: 'https://yourwebsite.com',
+    livePreviewUrl: 'https://db-gamma-khaki.vercel.app/',
   },
   {
     id: 2,
