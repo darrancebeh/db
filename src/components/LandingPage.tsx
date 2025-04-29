@@ -123,6 +123,8 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           <motion.a
             href="/files/Resume_DarranceBehHengShek_Mar2025.pdf"
             download
+            target="_blank"
+            rel="noopener noreferrer" 
             // Added relative and group classes
             className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 rounded-md shadow-sm transition-colors duration-300 hover:text-gray-100"
             whileHover={{ scale: 1.05 }}
