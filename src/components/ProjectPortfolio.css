@@ -66,6 +66,44 @@
   font-weight: 600;
 }
 
+/* --- NEW CATEGORY TEXT STYLES --- */
+.project-categories {
+  margin-bottom: 1rem;
+  display: flex; /* Keep flex for alignment if needed, or remove for block flow */
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 0.25rem 0rem; /* Small vertical gap, no horizontal gap for text */
+  line-height: 1.5; /* Adjust line height for readability */
+}
+
+.category-text {
+  font-size: 0.9rem; /* Adjust font size */
+  font-weight: 500; /* Medium weight */
+  /* Colors are applied via specific classes below */
+}
+
+.category-separator {
+  color: #6b7280; /* Muted separator color (gray-500) */
+  margin: 0 0.4rem; /* Space around the separator */
+  font-weight: bold;
+}
+
+/* Remove old badge and dot styles */
+/* .category-badge { ... } */
+/* .category-dot { ... } */
+
+/* Category Color Coding - Apply only color */
+.category-color-ai-ml { color: #f472b6; } /* Pink 400 */
+.category-color-data-science { color: #60a5fa; } /* Blue 400 */
+.category-color-web-dev { color: #34d399; } /* Emerald 400 */
+.category-color-frontend { color: #38bdf8; } /* Sky 400 */
+.category-color-backend { color: #fb923c; } /* Orange 400 */
+.category-color-full-stack { color: #a78bfa; } /* Violet 400 */
+.category-color-finance { color: #4ade80; } /* Green 400 */
+.category-color-placeholder,
+.category-color-default { color: #9ca3af; } /* Gray 400 */
+/* --- END CATEGORY STYLES --- */
+
+
 .project-tech-stack {
   margin-bottom: 1.2rem;
   display: flex;
@@ -74,6 +112,7 @@
 }
 
 .tech-badge {
+  /* Keep original tech badge styles for contrast */
   background-color: rgba(255, 255, 255, 0.1);
   color: #cbd5e1;
   padding: 0.35rem 0.7rem;

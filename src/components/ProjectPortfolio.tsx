@@ -42,7 +42,9 @@ interface ProjectPortfolioProps {
 }
 
 const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant }) => {
-  const FEATURED_PROJECTS_COUNT = 3;
+  // --- CHANGE FEATURED COUNT ---
+  const FEATURED_PROJECTS_COUNT = 6;
+  // --- END CHANGE ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalGridRef = useRef<HTMLDivElement>(null); // Ref for the scrollable grid container
 
@@ -94,6 +96,21 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
     transition: { duration: 0.2 }
   };
 
+  // Helper function to get category class
+  const getCategoryClass = (category: string) => {
+    switch (category.toLowerCase()) {
+      case 'ai/ml': return 'category-color-ai-ml'; // Use color-specific classes
+      case 'data science': return 'category-color-data-science';
+      case 'web development': return 'category-color-web-dev';
+      case 'frontend': return 'category-color-frontend';
+      case 'backend': return 'category-color-backend';
+      case 'full stack': return 'category-color-full-stack';
+      case 'finance': return 'category-color-finance';
+      case 'placeholder': return 'category-color-placeholder';
+      default: return 'category-color-default';
+    }
+  };
+
   return (
     <motion.section
       className="portfolio-section bg-gradient-animate"
@@ -127,6 +144,21 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
             <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-image" />
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
+              {/* --- UPDATE CATEGORIES --- */}
+              <div className="project-categories">
+                {project.categories.map((category, index) => (
+                  <React.Fragment key={category}>
+                    <span className={`category-text ${getCategoryClass(category)}`}>
+                      {category}
+                    </span>
+                    {/* Add a separator except for the last item */}
+                    {index < project.categories.length - 1 && (
+                      <span className="category-separator"> • </span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+              {/* --- END UPDATE CATEGORIES --- */}
               <div className="project-tech-stack">
                 {project.techStack.map((tech) => (
                   <span key={tech} className="tech-badge">{tech}</span>
@@ -238,6 +270,21 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
                       <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-image" />
                       <div className="project-content">
                         <h3 className="project-title">{project.title}</h3>
+                        {/* --- UPDATE CATEGORIES --- */}
+                        <div className="project-categories">
+                          {project.categories.map((category, index) => (
+                            <React.Fragment key={category}>
+                              <span className={`category-text ${getCategoryClass(category)}`}>
+                                {category}
+                              </span>
+                              {/* Add a separator except for the last item */}
+                              {index < project.categories.length - 1 && (
+                                <span className="category-separator"> • </span>
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </div>
+                        {/* --- END UPDATE CATEGORIES --- */}
                         <div className="project-tech-stack">
                           {project.techStack.map((tech) => (
                             <span key={tech} className="tech-badge">{tech}</span>
