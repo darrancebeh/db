@@ -17,9 +17,9 @@ body {
 }
 
 button, a {
-  cursor: none; /* Hide the default cursor */
+  cursor: none;
 }
 
 .image-container {
-  cursor: none; /* Hide the default cursor */
+  cursor: none;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'; // Import useEffect and useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiArrowRight, FiX } from 'react-icons/fi';
 import './ProjectPortfolio.css';
@@ -42,9 +42,7 @@ interface ProjectPortfolioProps {
 }
 
 const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant }) => {
-  // --- CHANGE FEATURED COUNT ---
   const FEATURED_PROJECTS_COUNT = 6;
-  // --- END CHANGE ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalGridRef = useRef<HTMLDivElement>(null); // Ref for the scrollable grid container
 
@@ -123,7 +121,6 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
       onMouseEnter={handleMouseEnterInteractive} // Apply to section for general area
       onMouseLeave={handleMouseLeaveDefault}   // Apply to section for general area
     >
-      {/* Changed heading */}
       <h2 id="portfolio-heading" className="section-heading">Featured Projects</h2>
       <motion.div
         className="portfolio-grid"
@@ -145,7 +142,6 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
             <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-image" />
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
-              {/* --- UPDATE CATEGORIES --- */}
               <div className="project-categories">
                 {project.categories.map((category, index) => (
                   <React.Fragment key={category}>
@@ -159,7 +155,6 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
                   </React.Fragment>
                 ))}
               </div>
-              {/* --- END UPDATE CATEGORIES --- */}
               <div className="project-tech-stack">
                 {project.techStack.map((tech) => (
                   <span key={tech} className="tech-badge">{tech}</span>
@@ -271,7 +266,6 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
                       <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-image" />
                       <div className="project-content">
                         <h3 className="project-title">{project.title}</h3>
-                        {/* --- UPDATE CATEGORIES --- */}
                         <div className="project-categories">
                           {project.categories.map((category, index) => (
                             <React.Fragment key={category}>
@@ -285,7 +279,6 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
                             </React.Fragment>
                           ))}
                         </div>
-                        {/* --- END UPDATE CATEGORIES --- */}
                         <div className="project-tech-stack">
                           {project.techStack.map((tech) => (
                             <span key={tech} className="tech-badge">{tech}</span>

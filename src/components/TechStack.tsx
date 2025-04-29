@@ -20,10 +20,8 @@ import { FaReact, FaGitAlt, FaPython } from "react-icons/fa";
 import { TbMathFunction } from "react-icons/tb";
 import { BiLineChart } from "react-icons/bi";
 
-// Define the possible cursor variants type
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
-// Define props including setCursorVariant
 interface TechStackProps {
   setCursorVariant: (variant: CursorVariant) => void;
 }
@@ -60,17 +58,16 @@ const techStackData = [
   { name: "TensorFlow", description: "AI/ML Framework", Icon: SiTensorflow, color: "#FF6F00" },
   { name: "PyTorch", description: "AI/ML Framework", Icon: SiPytorch, color: "#EE4C2C" },
   { name: "scikit-learn", description: "ML Algorithm Library", Icon: SiScikitlearn, color: "#F7931E" },
-  { name: "HuggingFace", description: "NLP Library", Icon: SiHuggingface, color: "#FFD21E" }, // Updated description
-  { name: "NLTK", description: "Natural Language Processing", Icon: FaPython, color: "#3776AB" }, // Re-added NLTK
-  { name: "Pandas", description: "Data Manipulation & Analysis", Icon: SiPandas, color: "#5A5B9F" }, // Lighter color
-  { name: "NumPy", description: "Data Cleaning & Aggregation", Icon: SiNumpy, color: "#4D77CF" }, // Lighter color
+  { name: "HuggingFace", description: "NLP Library", Icon: SiHuggingface, color: "#FFD21E" },
+  { name: "NLTK", description: "Natural Language Processing", Icon: FaPython, color: "#3776AB" },
+  { name: "Pandas", description: "Data Manipulation & Analysis", Icon: SiPandas, color: "#5A5B9F" },
+  { name: "NumPy", description: "Data Cleaning & Aggregation", Icon: SiNumpy, color: "#4D77CF" },
   { name: "Tableau", description: "Data Visualization", Icon: SiTableau, color: "#E97627" },
   { name: "Matplotlib", description: "Data Visualization", Icon: BiLineChart, color: "#11557c" },
   { name: "QuantLib", description: "Quant Library", Icon: TbMathFunction, color: "#888888" },
 
   // Backend & Language
-  { name: "Django", description: "Backend Development", Icon: SiDjango, color: "#44B78B" }, // Lighter color
-  // Replaced Node.js with TypeScript
+  { name: "Django", description: "Backend Development", Icon: SiDjango, color: "#44B78B" },
   { name: "TypeScript", description: "The Better JavaScript", Icon: SiTypescript, color: "#3178C6" },
   { name: "Express.js", description: "Backend Development", Icon: SiExpress, color: "#FFFFFF" },
 
@@ -97,7 +94,6 @@ interface TechStackProps {
 
 export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInteractive }: TechStackProps) {
   return (
-    // **** ADDED relative and overflow-hidden ****
     <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden">
       <motion.div
         className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
@@ -142,10 +138,7 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
           delay: 2,
         }}
       />
-      {/* **** End Background Shapes **** */}
 
-
-      {/* Title ( **** ADDED relative z-10 **** ) */}
       <motion.h2
         className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 mb-10 sm:mb-14 lg:mb-18 text-center"
         initial={{ opacity: 0, y: -30 }}
@@ -155,7 +148,6 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
         My Tech Stack
       </motion.h2>
 
-      {/* Grid ( **** ADDED relative z-10 **** ) */}
       <motion.div
         className="relative z-10 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6 w-full max-w-6xl"
         variants={containerVariants}

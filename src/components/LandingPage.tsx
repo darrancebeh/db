@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
-// Import Dispatch and SetStateAction
 import { Dispatch, SetStateAction } from 'react';
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
@@ -32,15 +31,11 @@ const itemVariants = {
   },
 };
 
-// Update props to include setCursorVariant
 interface LandingPageProps {
   setCursorVariant: Dispatch<SetStateAction<CursorVariant>>;
-  // Keep original props if they were used elsewhere, otherwise remove them
-  // onMouseEnterInteractive: () => void;
-  // onMouseLeaveInteractive: () => void;
+  // Keep original props if they were used elsewhere
 }
 
-// Destructure the setCursorVariant prop
 export default function LandingPage({ setCursorVariant }: LandingPageProps) {
   // Define handlers using setCursorVariant
   const handleMouseEnterInteractive = () => setCursorVariant('interactive');
@@ -172,7 +167,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }} // Delayed fade-in
         >
-          {/* ... social icons ... */}
            <motion.a
             href="https://github.com/darrancebeh"
             target="_blank"

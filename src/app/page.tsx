@@ -10,11 +10,8 @@ import Footer from "@/components/Footer";
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
 export default function Home() {
-  // --- Lifted Cursor Logic ---
   const cursorRef = useRef<HTMLDivElement>(null);
-  // State for cursor visibility
-  const [isCursorVisible, setIsCursorVisible] = useState(true); // State for visibility
-  // State for cursor appearance variant
+  const [isCursorVisible, setIsCursorVisible] = useState(true);
   const [cursorVariant, setCursorVariant] = useState<CursorVariant>('default');
 
   useEffect(() => {
@@ -29,11 +26,11 @@ export default function Home() {
     };
 
     const handleMouseEnterBody = () => {
-      setIsCursorVisible(true); // Set state to true
+      setIsCursorVisible(true);
     };
 
     const handleMouseLeaveBody = () => {
-       setIsCursorVisible(false); // Set state to false
+       setIsCursorVisible(false);
        setCursorVariant('default'); // Reset variant when leaving window
     };
 
@@ -54,8 +51,6 @@ export default function Home() {
       document.body.removeEventListener("mouseleave", handleMouseLeaveBody);
     };
   }, []);
-
-  // --- End Lifted Cursor Logic ---
 
   // Determine styles based on variant
   const getCursorStyles = () => {
@@ -92,7 +87,6 @@ export default function Home() {
 
   return (
     <main className="relative">
-      {/* --- Lifted Cursor Element --- */}
       <div
         ref={cursorRef}
         className={`
@@ -106,7 +100,6 @@ export default function Home() {
           ...getCursorStyles(),
         }}
       />
-      {/* --- End Lifted Cursor Element --- */}
 
       {/* Pass setCursorVariant down to children */}
       <LandingPage

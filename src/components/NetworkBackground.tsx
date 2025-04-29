@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 import type { Engine } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim"; // Using slim bundle
+import { loadSlim } from "tsparticles-slim";
 
 const NetworkBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -22,62 +22,58 @@ const NetworkBackground = () => {
       events: {
         onHover: {
           enable: true,
-          // Apply multiple modes on hover
           mode: ["bubble", "connect", "slow"],
         },
         resize: true,
       },
       modes: {
         bubble: {
-          distance: 250, // Area of effect for bubble
-          size: 8.5, // Size particles expand to
-          duration: 3, // Duration of the bubble effect
-          opacity: 0.8, // Opacity during bubble
-          color: "#ffffff", // Color during bubble
+          distance: 250,
+          size: 8.5,
+          duration: 3,
+          opacity: 0.8,
+          color: "#ffffff",
         },
 
-        // Connect effect configuration (draws lines between particles in hover area)
         connect: {
-          distance: 100, // Max distance between particles to connect
+          distance: 100,
           links: {
-            opacity: 0.6, // Opacity of the connection lines
+            opacity: 0.6,
           },
-          radius: 150, // Area of effect for connection
+          radius: 150,
         },
 
-        // Slow effect configuration (particles slow down in hover area)
         slow: {
-          factor: 2, // Slowdown factor (higher means slower)
-          radius: 200, // Area of effect for slowdown
+          factor: 2,
+          radius: 200,
         },
       },
     },
     particles: {
       color: {
-        value: "#9ca3af", // Base particle color
+        value: "#9ca3af",
       },
       links: {
-        color: "#6b7280", // Default link color
+        color: "#6b7280",
         distance: 150,
-        enable: true, // Enable default links between particles
-        opacity: 0.1, // Make default links very subtle
+        enable: true,
+        opacity: 0.1,
         width: 1,
       },
       move: {
         direction: "none",
         enable: true,
         outModes: {
-          default: "bounce", // Keep particles on screen
+          default: "bounce",
         },
         random: true,
-        speed: 0.7, // Speed of particles
+        speed: 0.7,
         straight: false,
-        
-        // Add trail effect to moving particles
+
         trail: {
           enable: false,
-          fill: { color: "#1f2937" }, // Trail color (dark gray)
-          length: 10, // Length of the trail
+          fill: { color: "#1f2937" },
+          length: 10,
         },
       },
       number: {
@@ -85,10 +81,10 @@ const NetworkBackground = () => {
           enable: true,
           area: 800,
         },
-        value: 80, // Total particle count
+        value: 80,
       },
       opacity: {
-        value: { min: 0.1, max: 0.5 }, // Opacity variation
+        value: { min: 0.1, max: 0.5 },
         animation: {
           enable: true,
           speed: 0.8,
@@ -119,7 +115,7 @@ const NetworkBackground = () => {
       loaded={particlesLoaded}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       options={options as any}
-      className="absolute top-0 left-0 w-full h-full z-0" // Ensure it's behind content
+      className="absolute top-0 left-0 w-full h-full z-0"
     />
   );
 };

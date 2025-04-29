@@ -14,12 +14,12 @@
 /* Keyframes for star movement */
 @keyframes moveStarsSlow {
   from { background-position: 0 0; }
-  to   { background-position: -10000px 5000px; } /* Adjust distance for speed/direction */
+  to   { background-position: -10000px 5000px; }
 }
 
 @keyframes moveStarsFast {
   from { background-position: 0 0; }
-  to   { background-position: -10000px 3000px; } /* Faster movement */
+  to   { background-position: -10000px 3000px; }
 }
 
 /* Optional: Keyframes for twinkling effect */
@@ -33,21 +33,21 @@
   /* Gradient */
   background: linear-gradient(-45deg, #050505, #101018, #080808, #151520, #050505);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite; /* Adjusted timing */
-  background-color: #050505; /* Fallback */
-  position: relative; /* Needed for absolute positioning of pseudo-elements */
-  z-index: 0; /* Ensure it's a stacking context */
-  overflow: hidden; /* Prevent pseudo-elements spilling out */
+  animation: gradientShift 15s ease infinite;
+  background-color: #050505;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
 }
 
 /* Star Layer 1 (Smaller, Slower) */
 .bg-gradient-animate::before {
   content: "";
   position: absolute;
-  inset: 0; /* Replaces top/left/right/bottom: 0 */
+  inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -2; /* Behind ::after */
+  z-index: -2;
 
   /* Generate small stars using radial gradients */
   background-image: radial-gradient(1px 1px at 20px 30px, #eee, transparent),
@@ -57,13 +57,12 @@
                     radial-gradient(1px 1px at 130px 80px, #ddd, transparent),
                     radial-gradient(1.5px 1.5px at 160px 120px, #fff, transparent);
   background-repeat: repeat;
-  background-size: 200px 200px; /* Density of stars */
-  opacity: 0.8; /* Base opacity */
+  background-size: 200px 200px;
+  opacity: 0.8;
 
-  /* Apply slow movement and twinkle */
   animation:
-    moveStarsSlow 200s linear infinite, /* Very slow drift */
-    twinkle 5s ease-in-out infinite alternate; /* Subtle twinkle */
+    moveStarsSlow 200s linear infinite,
+    twinkle 5s ease-in-out infinite alternate;
 }
 
 /* Star Layer 2 (Larger, Faster) */
@@ -73,16 +72,15 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* In front of ::before */
+  z-index: -1;
 
   /* Generate slightly larger/brighter stars */
   background-image: radial-gradient(1.5px 1.5px at 50px 20px, #fff, transparent),
                     radial-gradient(2px 2px at 100px 90px, #eee, transparent),
                     radial-gradient(1.5px 1.5px at 150px 150px, #ddd, transparent);
   background-repeat: repeat;
-  background-size: 300px 300px; /* Lower density */
-  opacity: 0.6; /* Slightly less opaque */
+  background-size: 300px 300px;
+  opacity: 0.6;
 
-  /* Apply faster movement */
-  animation: moveStarsFast 120s linear infinite; /* Faster drift */
+  animation: moveStarsFast 120s linear infinite;
 }

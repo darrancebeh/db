@@ -8,20 +8,19 @@ body {
 }
 
 button, a {
-  cursor: none; /* Assuming a custom cursor is implemented elsewhere */
+  cursor: none;
 }
 
 .image-container {
-  cursor: none; /* Assuming a custom cursor is implemented elsewhere */
+  cursor: none;
 }
 
 .about-me-container {
     display: flex;
     position: relative;
-    /* Reduce min-height slightly */
     min-height: 75vh;
     width: 100%;
-    max-width: 1200px; /* Keep max-width */
+    max-width: 1200px;
     margin: 60px auto;
     overflow: hidden;
     border-radius: 20px;
@@ -41,7 +40,6 @@ button, a {
   }
 
   .left-section, .right-section {
-    /* Reduce padding */
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -51,13 +49,11 @@ button, a {
   }
 
   .left-section {
-    /* Give less space */
     flex: 0.8;
     justify-content: center;
   }
 
   .right-section {
-     /* Give more space */
      flex: 1.2;
      justify-content: center;
      align-items: flex-start;
@@ -101,22 +97,21 @@ button, a {
      bottom: 10%;
   }
 
-  /* --- Left Section --- */
 
   /* Image */
   .image-container {
-    width: 380px; /* Slightly smaller */
+    width: 380px;
     height: 380px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 40px;
     position: relative;
-    border: 4px solid transparent; /* Slightly thinner border */
+    border: 4px solid transparent;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
     transition: border-color 0.6s ease, transform 0.4s ease; /* Smoother transitions */
   }
   .image-container:hover {
-      transform: scale(1.04); /* Slightly larger hover scale */
+      transform: scale(1.04);
   }
 
   .state-personal .image-container {
@@ -154,8 +149,8 @@ button, a {
     display: flex;
     align-items: center;
     border: 1px solid rgba(128, 128, 128, 0.2); /* Lighter border */
-    border-radius: 30px; /* More rounded */
-    padding: 8px 10px; /* Adjust padding */
+    border-radius: 30px;
+    padding: 8px 10px;
     background-color: rgba(255, 255, 255, 0.05); /* More subtle background */
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
@@ -171,13 +166,13 @@ button, a {
   .toggle-button {
     background: none;
     border: none;
-    padding: 10px 20px; /* Adjust padding */
-    font-size: 0.95rem; /* Slightly smaller font */
+    padding: 10px 20px;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #555;
     /* Smoother transitions */
     transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px;
     display: flex;
     align-items: center;
     line-height: 1; /* Ensure icon and text align well */
@@ -214,7 +209,7 @@ button, a {
 
   /* Active button state - Refined colors/shadows */
   .toggle-button.active {
-    transform: scale(1.03); /* Slightly less scale */
+    transform: scale(1.03);
   }
   .state-personal .toggle-button.active {
     background-color: #2dd4bf; /* Teal */
@@ -230,7 +225,7 @@ button, a {
   /* Hover on non-active buttons - More subtle */
   .toggle-button:not(.active):hover {
       background-color: rgba(0, 0, 0, 0.03);
-      transform: translateY(-2px); /* Slightly more lift */
+      transform: translateY(-2px);
   }
   .state-developer .toggle-button:not(.active):hover {
       background-color: rgba(255, 255, 255, 0.06);
@@ -244,7 +239,7 @@ button, a {
   /* Focus state for accessibility */
   .toggle-button:focus-visible {
     outline: 2px solid transparent; /* Remove default outline */
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); /* Example focus ring, adjust color as needed */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); /* Example focus ring */
   }
   .state-developer .toggle-button:focus-visible {
     box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.6); /* Developer theme focus ring */
@@ -253,11 +248,10 @@ button, a {
     box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.6); /* Personal theme focus ring */
   }
 
-  /* --- Right Section --- */
 
 .right-section {
   position: relative;
-  overflow: hidden; /* Keep overflow hidden */
+  overflow: hidden;
   /* Add a subtle inner shadow or gradient overlay based on state */
 }
 
@@ -297,7 +291,6 @@ button, a {
 }
 
 .content.visible {
-  /* display: block; */ /* Remove display block from base style */
   opacity: 1;
   transform: translateY(0) scale(1); /* Move to final position and size */
   pointer-events: auto;
@@ -305,9 +298,9 @@ button, a {
 }
 
 .content h2 {
-  /* Defined via Tailwind in TSX - Keep or move here? Let's move here */
-  font-size: 2.2rem; /* Adjust size */
-  font-weight: 500; /* Medium weight */
+  /* Defined via Tailwind in TSX - Moved here */
+  font-size: 2.2rem;
+  font-weight: 500;
   margin-bottom: 1.75rem; /* mb-7 equivalent */
   position: relative;
   padding-bottom: 0.5rem; /* Space for underline */
@@ -334,8 +327,8 @@ button, a {
 }
 
 .content p {
-  /* Defined via Tailwind in TSX - Keep or move here? Let's move here */
-  font-size: 1.1rem; /* Adjust size */
+  /* Defined via Tailwind in TSX - Moved here */
+  font-size: 1.1rem;
   line-height: 1.8; /* leading-loose equivalent */
   transition: color 0.6s ease;
 }
@@ -348,10 +341,7 @@ button, a {
 .personal-content p {
     color: #374151; /* Gray-700 */
     font-family: 'Georgia', serif; /* Changed from Dancing Script for readability */
-    /* font-family: 'Dancing Script', cursive; */ /* Revert if script font is desired */
-    /* letter-spacing: 0.5px; */
     text-align: left; /* Changed from justify */
-    /* font-size: 1.2em; */
 }
 .personal-content h2::after {
     background-color: #38bdf8; /* Sky blue 400 */
@@ -361,7 +351,6 @@ button, a {
 .developer-content h2 {
     color: #e5e7eb; /* Gray-200 */
     font-family: 'Consolas', 'Monaco', monospace;
-    /* text-shadow: 0 0 8px rgba(167, 139, 250, 0.4); */ /* Removed text-shadow for cleaner look */
 }
 .developer-content p {
     color: #d1d5db; /* Gray-300 */
@@ -374,7 +363,6 @@ button, a {
     background-color: #a78bfa; /* Softer purple */
 }
 
-/* --- Text Highlighting --- */
 
 .highlight-personal,
 .highlight-developer {
@@ -412,9 +400,7 @@ button, a {
 
 
 /* Remove text-shadow from developer state for cleaner look */
-/* .state-developer .developer-content {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-} */
+
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
@@ -427,7 +413,6 @@ button, a {
   }
 
   .left-section, .right-section {
-    /* Adjust mobile padding */
     padding: 35px 25px;
     width: 100%;
     box-sizing: border-box;
@@ -435,7 +420,7 @@ button, a {
   }
 
   .right-section {
-    min-height: auto; /* Remove min-height */
+    min-height: auto;
     align-items: center;
     text-align: center;
   }
@@ -443,13 +428,13 @@ button, a {
   .separator-line {
     /* ... separator styles for mobile are likely okay ... */
     position: relative;
-    width: 70%; /* Adjust width */
+    width: 70%;
     height: 2px;
     top: auto;
     bottom: auto;
     left: 50%; /* Center horizontally in mobile */
     transform: translateX(-50%);
-    margin: 25px auto; /* Adjust margin */
+    margin: 25px auto;
     order: 1;
   }
 
@@ -461,7 +446,6 @@ button, a {
   .content {
     position: static;
     width: 100%;
-    /* Adjust width calculation is not needed here as padding is handled by parent */
     opacity: 0;
     transform: translateY(15px);
     transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -476,25 +460,25 @@ button, a {
   }
 
   .content h2 {
-    font-size: 1.8rem; /* Adjust size */
-    margin-bottom: 1rem; /* Adjust margin */
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
   .content p {
-    font-size: 1rem; /* Adjust size */
-    line-height: 1.7; /* Adjust line height */
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
   .image-container {
-    width: 180px; /* Adjust size */
+    width: 180px;
     height: 180px;
     margin-bottom: 30px;
   }
 
   .toggle-controls {
-    padding: 6px 8px; /* Adjust padding */
+    padding: 6px 8px;
   }
   .toggle-button {
-    padding: 8px 16px; /* Adjust padding */
+    padding: 8px 16px;
   }
 }
 

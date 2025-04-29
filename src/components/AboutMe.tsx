@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaCode } from 'react-icons/fa';
-import './AboutMe.css'; // Ensure CSS is imported
+import './AboutMe.css';
 
 interface AboutMeProps {
   setCursorVariant: (variant: CursorVariant) => void;
@@ -9,7 +9,6 @@ type ProfileState = 'personal' | 'developer';
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
 const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
-  // Change the initial state from 'personal' to 'developer'
   const [activeState, setActiveState] = useState<ProfileState>('developer');
   const [isHoveringImage, setIsHoveringImage] = useState(false);
   const [isMouseInside, setIsMouseInside] = useState(false);
@@ -125,7 +124,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ setCursorVariant }) => {
       {/* Separator Line */}
       <div className="separator-line"></div>
 
-      {/* Right Section - Remove z-10 */}
+      {/* Right Section */}
       <div className="right-section flex flex-col justify-center relative">
          {/* Content divs now only control visibility */}
          <div className={`content personal-content ${isPersonalActive ? 'visible' : ''}`}>
