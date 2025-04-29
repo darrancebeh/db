@@ -107,6 +107,7 @@ const ProjectPortfolio: React.FC<ProjectPortfolioProps> = ({ setCursorVariant })
       case 'full stack': return 'category-color-full-stack';
       case 'finance': return 'category-color-finance';
       case 'placeholder': return 'category-color-placeholder';
+      case 'ocr': return 'category-color-ocr';
       default: return 'category-color-default';
     }
   };

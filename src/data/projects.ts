@@ -44,7 +44,7 @@ export const projects: Project[] = [
     imageUrl: '/images/project-word4word-screenshot.png',
     description: 'Word-4-Word is a web-based OCR application that recognizes text from handwriting drawn by users on a canvas. Preview Hosting Soon.',
     techStack: ['Next.js', 'React', 'FastAPI', 'PaddleOCR', 'Pillow', 'Tailwind CSS'],
-    categories: ['AI/ML', 'Web Development', 'Full Stack'], // Added categories
+    categories: ['AI/ML', 'OCR', 'Web Development', 'Full Stack'], // Added categories
     githubUrl: 'https://github.com/darrancebeh/word4word',
   },
   {
