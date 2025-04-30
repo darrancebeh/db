@@ -46,24 +46,6 @@ export const projects: Project[] = [
     techStack: ['Next.js', 'React', 'FastAPI', 'PaddleOCR', 'Pillow', 'Tailwind CSS'],
     categories: ['AI/ML', 'OCR', 'Web Development', 'Full Stack'],
     githubUrl: 'https://github.com/darrancebeh/word4word',
-  },
-  {
-    id: 5,
-    title: 'Placeholder project 1',
-    imageUrl: '/images/project4_placeholder.png', // Consider unique placeholder images
-    description: 'This is a placeholder description for a future project. Details coming soon.',
-    techStack: ['Tech 1', 'Tech 2', 'Tech 3'],
-    categories: ['Placeholder'],
-    githubUrl: 'https://github.com/darrancebeh',
-  },
-  {
-    id: 6,
-    title: 'Placeholder project 2',
-    imageUrl: '/images/project5_placeholder.png', // Needs a new placeholder image
-    description: 'Another placeholder project description. Stay tuned for updates.',
-    techStack: ['Tech A', 'Tech B', 'Tech C'],
-    categories: ['Placeholder'],
-    githubUrl: 'https://github.com/darrancebeh',
-  },
+  }
   // Add more projects here if needed, ensuring they also have categories
 ];
