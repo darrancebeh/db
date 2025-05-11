@@ -22,12 +22,13 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: 'Tic-my-Toe',
+    title: 'Tic-AI-Toe',
     imageUrl: '/images/project-ticmytoe-screenshot.png',
-    description: 'Tic-my-Toe is a web-based Player vs AI approach to Tic-Tac-Toe utilizing reinforcement learning. Preview Hosting Soon.',
+    description: 'Tic-AI-Toe is a web-based Player vs AI approach to Tic-Tac-Toe utilizing reinforcement learning- The AI learns from its own mistakes and improves over time.',
     techStack: ['Next.js', 'React', 'FastAPI', 'Pydantic', 'Tailwind CSS'],
     categories: ['AI/ML', 'Web Development', 'Full Stack'],
-    githubUrl: 'https://github.com/darrancebeh/word4word', // Note: This seems to point to word4word repo, might need correction
+    githubUrl: 'https://github.com/darrancebeh/tic-ai-toe',
+    livePreviewUrl: 'https://tic-ai-toe.vercel.app/',
   },
   {
     id: 3,
