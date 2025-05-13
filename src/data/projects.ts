@@ -31,7 +31,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: 'RegEx-ify',
+    title: 'Reg:Ex-ify',
     imageUrl: '/images/project-regexify-screenshot.png',
     description: 'Regexify, also "RegEx-ify", is a RegEx (Regular Expressions) Generator that helps users create regular expressions for various use cases.',
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
