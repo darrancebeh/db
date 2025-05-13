@@ -31,6 +31,16 @@ export const projects: Project[] = [
   },
   {
     id: 3,
+    title: 'RegEx-ify',
+    imageUrl: '/images/project-regexify-screenshot.png',
+    description: 'Regexify, also "RegEx-ify", is a RegEx (Regular Expressions) Generator that helps users create regular expressions for various use cases.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    categories: ['RegEx', 'Web Development', 'Full Stack'],
+    githubUrl: 'https://github.com/darrancebeh/regexify',
+    livePreviewUrl: 'https://regexify.vercel.app/',
+  },
+  {
+    id: 4,
     title: 'Monte Carlol',
     imageUrl: '/images/project-montecarlol-screenshot.png',
     description: 'Monte-carlol is an interactive Monte Carlo simulation for stock price forecasting with real-time visualization. Preview Hosting Soon.',
@@ -39,7 +49,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/darrancebeh/monte-carlol',
   },
    {
-    id: 4,
+    id: 5,
     title: 'Word-4-Word',
     imageUrl: '/images/project-word4word-screenshot.png',
     description: 'Word-4-Word is a web-based OCR application that recognizes text from handwriting drawn by users on a canvas. Preview Hosting Soon.',
