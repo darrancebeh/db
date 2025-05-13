@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project: {db} - Personal Portfolio Website
 
-## Getting Started
+This is the repository for my personal portfolio website, showcasing my profile, projects, and technical skills. It's built with [Next.js](https://nextjs.org/) and styled with [Tailwind CSS](https://tailwindcss.com/).
 
-First, run the development server:
+## About This Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This website serves as a central hub for my professional presence online. It includes:
+*   A landing page to introduce myself.
+*   A section detailing my technical skills and the technologies I work with.
+*   An "About Me" page providing more background information.
+*   A portfolio showcasing my various projects with descriptions, tech stacks, and links to live demos and GitHub repositories.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Responsive Design**: Adapts to different screen sizes for optimal viewing on desktops, tablets, and mobile devices.
+*   **Interactive Elements**: Engaging user interface components, including a custom cursor effect.
+*   **Project Showcase**: Detailed display of projects with images, descriptions, and relevant links.
+*   **Dynamic Content**: Easily updatable project information.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+This project is built using a modern web development stack:
 
-To learn more about Next.js, take a look at the following resources:
+*   **Frontend**:
+    *   [Next.js](https://nextjs.org/) (React Framework)
+    *   [React](https://reactjs.org/)
+    *   [TypeScript](https://www.typescriptlang.org/)
+    *   [Tailwind CSS](https://tailwindcss.com/)
+    *   [Framer Motion](https://www.framer.com/motion/) (for animations)
+    *   [React Icons](https://react-icons.github.io/react-icons/)
+*   **Particles Background**:
+    *   [React TSParticles](https://particles.js.org/)
+    *   [tsparticles-slim](https://particles.js.org/)
+*   **Linting/Formatting**:
+    *   ESLint
+*   **Deployment**:
+    *   [Vercel](https://vercel.com/) (hosting platform)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Deploy on Vercel
+Copyright (c) 2025 Darrance Beh Heng Shek
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*   Bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+*   Uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font).
