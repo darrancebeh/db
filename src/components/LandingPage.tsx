@@ -1,10 +1,11 @@
 "use client";
 import "./LandingPage.css";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import WebGLBackground from "./WebGLBackground";
-import AnimatedSubtitle from "./AnimatedSubtitle";
-import GlassmorphismButton from "./GlassmorphismButton";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import WebGLBackground from './WebGLBackground';
+import AnimatedSubtitle from './AnimatedSubtitle';
+import GlassmorphismButton from './GlassmorphismButton';
+import SignalCrystal from './SignalCrystal/SignalCrystal';
 import { Dispatch, SetStateAction } from 'react';
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
@@ -49,8 +50,19 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
     border: '#93c5fd'
   });
 
+  // State for mouse position (for crystal interaction)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const handleColorChange = (colors: { particle: string; text: string; border: string }) => {
     setCurrentColors(colors);
+  };
+
+  // Mouse tracking for crystal interaction
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    setMousePosition({ x, y });
   };
 
   return (
@@ -59,9 +71,21 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
       style={{ backgroundColor: '#020203' }}
       onMouseEnter={handleMouseLeaveDefault}
       onMouseLeave={handleMouseLeaveDefault}
+      onMouseMove={handleMouseMove}
     >
       {/* WebGL Background with dynamic particle color */}
       <WebGLBackground particleColor={currentColors.particle} />
+
+      {/* Signal Crystal - Centerpiece */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none px-4 py-8"
+        style={{ zIndex: 5 }}
+      >
+        <SignalCrystal 
+          mousePosition={mousePosition}
+          className="opacity-95"
+        />
+      </div>
 
       {/* Main Content - Container for staggered animation */}
       <motion.main
