@@ -94,7 +94,10 @@ interface TechStackProps {
 
 export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInteractive }: TechStackProps) {
   return (
-    <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden">
+    <section 
+      data-section="tech-stack"
+      className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden"
+    >
       <motion.div
         className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
         animate={{

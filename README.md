@@ -29,8 +29,9 @@ This project is built using a modern web development stack:
     *   [Framer Motion](https://www.framer.com/motion/) (for animations)
     *   [React Icons](https://react-icons.github.io/react-icons/)
 *   **Particles Background**:
-    *   [React TSParticles](https://particles.js.org/)
-    *   [tsparticles-slim](https://particles.js.org/)
+    *   [Three.js](https://threejs.org/) (3D graphics library)
+    *   [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) (React renderer for Three.js)
+    *   [React Three Drei](https://github.com/pmndrs/drei) (Helper components for Three.js)
 *   **Linting/Formatting**:
     *   ESLint
 *   **Deployment**:

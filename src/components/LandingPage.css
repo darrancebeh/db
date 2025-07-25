@@ -28,7 +28,7 @@
   50% { opacity: 0.4; }
 }
 
-/* Class to apply the animated gradient and vector lines */
+/* Fallback class for WebGL background (used when WebGL is not supported) */
 .bg-gradient-animate {
   /* Gradient */
   background: linear-gradient(-45deg, #050505, #101018, #080808, #151520, #050505);
@@ -40,7 +40,7 @@
   overflow: hidden;
 }
 
-/* Star Layer 1 (Smaller, Slower) */
+/* Star Layer 1 (Smaller, Slower) - Fallback */
 .bg-gradient-animate::before {
   content: "";
   position: absolute;
@@ -65,7 +65,7 @@
     twinkle 5s ease-in-out infinite alternate;
 }
 
-/* Star Layer 2 (Larger, Faster) */
+/* Star Layer 2 (Larger, Faster) - Fallback */
 .bg-gradient-animate::after {
   content: "";
   position: absolute;
@@ -83,4 +83,22 @@
   opacity: 0.6;
 
   animation: moveStarsFast 120s linear infinite;
+}
+
+/* New styles for Living Data Sculpture hero section */
+.hero-content {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive text sizing for the new hero */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-content h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
 }
