@@ -23,10 +23,11 @@ const fragmentShader = `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
     
-    // Mix the uniform color with white for some variation
-    vec3 color = mix(uColor, vec3(1.0), 0.5);
-
-    gl_FragColor = vec4(color, 1.0 - smoothstep(0.4, 0.5, dist));
+    float brightness = smoothstep(0.0, 1.5, vSize);
+    vec3 finalColor = uColor * brightness;
+    float alpha = 1.0 - smoothstep(0.4, 0.5, dist);
+    
+    gl_FragColor = vec4(finalColor, alpha);
   }
 `;
 
@@ -40,31 +41,29 @@ const DynamicStars: React.FC<DynamicStarsProps> = ({ color }) => {
   
   const starCount = 5000;
 
-  const positions = useMemo(() => {
-    const vertices = new Float32Array(starCount * 3);
+  // --- CORRECTION ---
+  // The 'vertices' variable has been correctly renamed to 'positions'.
+  const { positions, sizes } = useMemo(() => {
+    const positions = new Float32Array(starCount * 3); // Initialized here
+    const sizes = new Float32Array(starCount);
+
     for (let i = 0; i < starCount; i++) {
       const i3 = i * 3;
       const radius = Math.random() * 100;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos((Math.random() * 2) - 1);
-      vertices[i3] = radius * Math.sin(phi) * Math.cos(theta);
-      vertices[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      vertices[i3 + 2] = radius * Math.cos(phi);
-    }
-    return vertices;
-  }, []);
+      
+      // All instances now correctly refer to 'positions'
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i3 + 2] = radius * Math.cos(phi);
 
-  const sizes = useMemo(() => {
-    const sizes = new Float32Array(starCount);
-    for (let i = 0; i < starCount; i++) {
       sizes[i] = Math.random() * 1.5;
     }
-    return sizes;
+    return { positions, sizes };
   }, []);
 
-  const uniforms = useMemo(() => ({
-    uColor: { value: new THREE.Color(color) }
-  }), [color]);
+  const colorObject = useMemo(() => new THREE.Color(), []);
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
@@ -85,7 +84,9 @@ const DynamicStars: React.FC<DynamicStarsProps> = ({ color }) => {
         ref={materialRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
-        uniforms={uniforms}
+        uniforms={{
+          uColor: { value: colorObject.set(color) },
+        }}
         transparent={true}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
