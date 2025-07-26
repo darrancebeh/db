@@ -38,3 +38,22 @@ export interface CmcLatestFearAndGreedApiResponse {
   data: FearAndGreedValue;
   status: CmcStatus;
 }
+
+/**
+ * Defines the concrete visual properties that will be passed to the 3D components.
+ * This structure is the output of our visual data mapping utility.
+ */
+export interface CrystalVisualParams {
+  // Color properties for the crystal's core and data motes
+  coreColor: string;       // Hex color string (e.g., '#FF5733')
+  moteColor: string;       // Hex color string
+
+  // Intensity and activity properties
+  coreIntensity: number;   // A normalized value (e.g., 0.1 to 1.0) for the core's brightness
+  pulseFrequency: number;  // A value representing pulse speed (e.g., Hz or a simple factor)
+  agitation: number;       // A normalized value for chaotic movement (e.g., of motes or crystal facets)
+
+  // Density and flow properties
+  moteCount: number;       // The absolute number of motes to render
+  flowIntensity: number;   // A factor controlling the speed of mote flow
+}

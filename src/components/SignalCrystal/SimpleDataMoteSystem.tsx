@@ -1,149 +1,139 @@
+// src/components/SignalCrystal/SimpleDataMoteSystem.tsx
+
 "use client";
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { CrystalVisualParams } from '@/types/marketData';
 
-interface SimpleDataMoteSystemProps {
-  flowIntensity?: number;
-  crystalPosition?: THREE.Vector3;
-}
-
-const SimpleDataMoteSystem: React.FC<SimpleDataMoteSystemProps> = ({
-  flowIntensity = 1.0,
-  crystalPosition = new THREE.Vector3(0, 0, 0)
+const SimpleDataMoteSystem: React.FC<CrystalVisualParams> = ({
+  moteCount,
+  moteColor,
+  flowIntensity,
+  agitation
 }) => {
-  const motesRef = useRef<THREE.Points>(null);
-  const moteCount = 80;
-
-  // Create initial positions and properties
-  const { positions, colors, sizes, velocities } = useMemo(() => {
+  const pointsRef = useRef<THREE.Points>(null);
+  
+  // --- MODIFICATION: Staggered Initialization ---
+  // We now also store life and maxLife per-mote to create a continuous flow from frame one.
+  const { positions, colors, sizes, velocities, life, maxLife } = useMemo(() => {
     const positions = new Float32Array(moteCount * 3);
     const colors = new Float32Array(moteCount * 3);
     const sizes = new Float32Array(moteCount);
     const velocities = new Float32Array(moteCount * 3);
+    const life = new Float32Array(moteCount);
+    const maxLife = new Float32Array(moteCount);
     
-    for (let i = 0; i < moteCount; i++) {
-      // Random spawn position around crystal
-      const angle = (i / moteCount) * Math.PI * 2 + Math.random() * 0.5;
-      const radius = 5 + Math.random() * 2;
-      const height = (Math.random() - 0.5) * 3;
-      
-      positions[i * 3] = Math.cos(angle) * radius;
-      positions[i * 3 + 1] = height;
-      positions[i * 3 + 2] = Math.sin(angle) * radius;
-      
-      // Blue to white color
-      colors[i * 3] = 0.3 + Math.random() * 0.4;     // R
-      colors[i * 3 + 1] = 0.6 + Math.random() * 0.4; // G
-      colors[i * 3 + 2] = 1.0;                       // B
-      
-      sizes[i] = 0.02 + Math.random() * 0.03;
-      
-      // Velocity towards crystal center
-      const direction = new THREE.Vector3(
-        crystalPosition.x - positions[i * 3],
-        crystalPosition.y - positions[i * 3 + 1],
-        crystalPosition.z - positions[i * 3 + 2]
-      ).normalize();
-      
-      velocities[i * 3] = direction.x * (0.5 + Math.random() * 0.3);
-      velocities[i * 3 + 1] = direction.y * (0.5 + Math.random() * 0.3);
-      velocities[i * 3 + 2] = direction.z * (0.5 + Math.random() * 0.3);
-    }
-    
-    return { positions, colors, sizes, velocities };
-  }, [moteCount, crystalPosition]);
-
-  // Animation loop
-  useFrame((state, delta) => {
-    if (!motesRef.current) return;
-
-    const positionAttribute = motesRef.current.geometry.attributes.position;
-    const colorAttribute = motesRef.current.geometry.attributes.color;
-    const sizeAttribute = motesRef.current.geometry.attributes.size;
-    
-    const positions = positionAttribute.array as Float32Array;
-    const colors = colorAttribute.array as Float32Array;
-    const sizes = sizeAttribute.array as Float32Array;
+    const crystalPosition = new THREE.Vector3(0, 0, 0);
 
     for (let i = 0; i < moteCount; i++) {
       const i3 = i * 3;
       
-      // Update position
-      positions[i3] += velocities[i3] * delta * flowIntensity;
-      positions[i3 + 1] += velocities[i3 + 1] * delta * flowIntensity;
-      positions[i3 + 2] += velocities[i3 + 2] * delta * flowIntensity;
+      const angle = Math.random() * Math.PI * 2;
+      const radius = 5 + Math.random() * 2;
+      const height = (Math.random() - 0.5) * 3;
       
-      // Check if reached crystal center
-      const distanceToCenter = Math.sqrt(
-        positions[i3] * positions[i3] +
-        positions[i3 + 1] * positions[i3 + 1] +
-        positions[i3 + 2] * positions[i3 + 2]
-      );
+      const spawnPos = new THREE.Vector3(Math.cos(angle) * radius, height, Math.sin(angle) * radius);
       
-      // Reset mote if too close to center
-      if (distanceToCenter < 1.0) {
+      const direction = new THREE.Vector3().subVectors(crystalPosition, spawnPos).normalize();
+      const speed = 0.5 + Math.random() * 0.3;
+      
+      velocities[i3] = direction.x * speed;
+      velocities[i3 + 1] = direction.y * speed;
+      velocities[i3 + 2] = direction.z * speed;
+
+      // Give each particle a random starting age.
+      maxLife[i] = 4.0 + Math.random() * 3.0; // 4-7 second lifetime
+      life[i] = Math.random() * maxLife[i];
+
+      // Pre-simulate its position based on its random age.
+      const travelTime = maxLife[i] - life[i];
+      positions[i3] = spawnPos.x + velocities[i3] * travelTime;
+      positions[i3 + 1] = spawnPos.y + velocities[i3 + 1] * travelTime;
+      positions[i3 + 2] = spawnPos.z + velocities[i3 + 2] * travelTime;
+
+      sizes[i] = 0.02 + Math.random() * 0.03;
+    }
+    
+    return { positions, colors, sizes, velocities, life, maxLife };
+  }, [moteCount]);
+
+  const geometryRef = useRef<THREE.BufferGeometry>(null);
+
+  useEffect(() => {
+    if (geometryRef.current) {
+      geometryRef.current.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometryRef.current.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      geometryRef.current.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    }
+  }, [positions, colors, sizes]);
+
+
+  const baseColor = useMemo(() => new THREE.Color(moteColor), [moteColor]);
+
+  useFrame((state, delta) => {
+    if (!geometryRef.current) return;
+
+    const posAttr = geometryRef.current.attributes.position as THREE.BufferAttribute;
+    const colAttr = geometryRef.current.attributes.color as THREE.BufferAttribute;
+    const sizeAttr = geometryRef.current.attributes.size as THREE.BufferAttribute;
+
+    for (let i = 0; i < moteCount; i++) {
+      const i3 = i * 3;
+      
+      // Decrease life
+      life[i] -= delta;
+      
+      // Respawn if dead
+      if (life[i] <= 0) {
+        life[i] = maxLife[i];
+
         const angle = Math.random() * Math.PI * 2;
         const radius = 5 + Math.random() * 2;
         const height = (Math.random() - 0.5) * 3;
-        
-        positions[i3] = Math.cos(angle) * radius;
-        positions[i3 + 1] = height;
-        positions[i3 + 2] = Math.sin(angle) * radius;
-        
-        // Recalculate velocity
-        const direction = new THREE.Vector3(
-          crystalPosition.x - positions[i3],
-          crystalPosition.y - positions[i3 + 1],
-          crystalPosition.z - positions[i3 + 2]
-        ).normalize();
-        
-        velocities[i3] = direction.x * (0.5 + Math.random() * 0.3);
-        velocities[i3 + 1] = direction.y * (0.5 + Math.random() * 0.3);
-        velocities[i3 + 2] = direction.z * (0.5 + Math.random() * 0.3);
+        posAttr.setXYZ(i, Math.cos(angle) * radius, height, Math.sin(angle) * radius);
       }
       
-      // Update color based on distance (closer = brighter)
-      const progress = Math.max(0, (7 - distanceToCenter) / 7);
-      colors[i3] = 0.2 + progress * 0.8;     // R: blue to white
-      colors[i3 + 1] = 0.5 + progress * 0.5; // G: blue to white
-      colors[i3 + 2] = 1.0;                   // B: stay blue
+      // Update position
+      const agitationVectorX = (Math.random() - 0.5) * agitation;
+      const agitationVectorY = (Math.random() - 0.5) * agitation;
+      const agitationVectorZ = (Math.random() - 0.5) * agitation;
+
+      posAttr.array[i3] += velocities[i3] * delta * flowIntensity + agitationVectorX * delta;
+      posAttr.array[i3 + 1] += velocities[i3 + 1] * delta * flowIntensity + agitationVectorY * delta;
+      posAttr.array[i3 + 2] += velocities[i3 + 2] * delta * flowIntensity + agitationVectorZ * delta;
       
-      // Pulsing size effect
+      // Update color and size based on life
+      const lifeRatio = Math.max(0, life[i] / maxLife[i]);
+      const progress = 1 - lifeRatio;
+
+      const finalColor = baseColor.clone().lerp(new THREE.Color(0xffffff), progress * 0.8);
+      colAttr.setXYZ(i, finalColor.r, finalColor.g, finalColor.b);
+      
       const pulse = 1 + Math.sin(state.clock.elapsedTime * 2 + i * 0.1) * 0.3;
-      sizes[i] = (0.03 + Math.random() * 0.02) * pulse * (1 + progress);
+      // Fade in and out based on life
+      const fadeIn = Math.min(1.0, (maxLife[i] - life[i]) * 2);
+      const fadeOut = Math.min(1.0, life[i] * 4);
+      const alpha = fadeIn * fadeOut;
+      sizeAttr.setX(i, sizes[i] * pulse * (1 + progress) * alpha);
     }
 
-    // Mark attributes as needing update
-    positionAttribute.needsUpdate = true;
-    colorAttribute.needsUpdate = true;
-    sizeAttribute.needsUpdate = true;
+    posAttr.needsUpdate = true;
+    colAttr.needsUpdate = true;
+    sizeAttr.needsUpdate = true;
   });
 
   return (
-    <points ref={motesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          args={[colors, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-size"
-          args={[sizes, 1]}
-        />
-      </bufferGeometry>
+    <points ref={pointsRef}>
+      <bufferGeometry ref={geometryRef} />
       <pointsMaterial
         size={0.1}
-        vertexColors={true}
-        transparent={true}
+        vertexColors
+        transparent
         opacity={0.9}
         blending={THREE.AdditiveBlending}
-        sizeAttenuation={true}
-        alphaTest={0.001}
+        sizeAttenuation
+        depthWrite={false}
       />
     </points>
   );
