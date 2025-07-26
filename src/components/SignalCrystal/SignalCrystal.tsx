@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import CrystalGeometry from './CrystalGeometry';
+import DataMoteSystem from './SimpleDataMoteSystem';
+import * as THREE from 'three';
 
 interface SignalCrystalProps {
   mousePosition: { x: number; y: number };
@@ -29,6 +31,12 @@ function CrystalScene({ mousePosition }: { mousePosition: { x: number; y: number
 
       {/* HDR environment for realistic reflections */}
       <Environment preset="night" />
+
+      {/* Data Mote Flow System */}
+      <DataMoteSystem 
+        flowIntensity={1.2}
+        crystalPosition={new THREE.Vector3(0, 0, 0)}
+      />
 
       {/* The crystal itself */}
       <CrystalGeometry 
