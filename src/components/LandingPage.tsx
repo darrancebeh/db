@@ -1,7 +1,7 @@
 "use client";
 import "./LandingPage.css";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, easeInOut, Variants } from "framer-motion"; // Import Variants and easeInOut
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 import { Dispatch, SetStateAction } from 'react';
@@ -9,10 +9,9 @@ import GlassmorphismButton from "./GlassmorphismButton";
 import AnimatedSubtitle from "./AnimatedSubtitle";
 import { getColorForTitle } from "../utils/colorTransitions";
 
-// Define the possible cursor variants type (can be imported from page.tsx if needed)
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
-const containerVariants = {
+const containerVariants: Variants = { // Add explicit Variants type
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -22,38 +21,37 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+// --- CORRECTION 1: Use the imported `easeInOut` function ---
+const itemVariants: Variants = { // Add explicit Variants type
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.4, 0, 0.2, 1],
+      ease: easeInOut, // Use the function directly, not a numeric array
     },
   },
 };
 
 interface LandingPageProps {
   setCursorVariant: Dispatch<SetStateAction<CursorVariant>>;
-  // Keep original props if they were used elsewhere
 }
 
 export default function LandingPage({ setCursorVariant }: LandingPageProps) {
-  // Define handlers using setCursorVariant
   const handleMouseEnterInteractive = () => setCursorVariant('interactive');
   const handleMouseLeaveDefault = () => setCursorVariant('default');
 
-  // Track current subtitle index for color
-  const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
-  const subtitleTitles = ["Web3 DeFi Protocol Engineer", "US Market & Crypto Retail Quant", "Entrepreneur & Aspiring Co-/Founder"];
-  const subtitleColor = getColorForTitle(subtitleTitles[currentSubtitleIndex]).border;
+  // This state was unused, it's good practice to remove it.
+  // const [] = useState(0); 
 
-  // Track current subtitle color for GlassmorphismButton
-  const [subtitleBorderColor, setSubtitleBorderColor] = useState(getColorForTitle("Web3 DeFi Protocol Engineer").border);
+  // --- CORRECTION 2: Explicitly type the useState hook ---
+  const [subtitleBorderColor, setSubtitleBorderColor] = useState<string>(
+    getColorForTitle("Web3 DeFi Protocol Engineer").border
+  );
 
-  // Handler for subtitle color change
   const handleSubtitleColorChange = (colors: { particle: string; text: string; border: string }) => {
+    // This assignment is now type-safe because setSubtitleBorderColor expects a 'string'.
     setSubtitleBorderColor(colors.border);
   };
 
@@ -65,14 +63,12 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
     >
       <NetworkBackground />
 
-      {/* Main Content - Container for staggered animation */}
       <motion.main
         className="flex flex-col items-center gap-4 z-10 relative"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Alias - Item */}
         <motion.span
           className="text-8xl font-extrabold tracking-tighter text-gray-500 font-[family-name:var(--font-geist-mono)] mb-2 transition-colors duration-300"
           variants={itemVariants}
@@ -88,7 +84,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           db
         </motion.span>
 
-        {/* Name - Item */}
         <motion.h1
           className="text-6xl font-medium tracking-tight text-gray-100 transition-colors duration-300"
           variants={itemVariants}
@@ -103,7 +98,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           Darrance Beh Heng Shek
         </motion.h1>
 
-        {/* Subtitle - Item */}
         <motion.div
           className="mt-4 w-full flex justify-center"
           variants={itemVariants}
@@ -114,7 +108,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           />
         </motion.div>
 
-        {/* Location - Item */}
         <motion.p
           className="mt-2 text-lg text-gray-600 font-[family-name:var(--font-geist-mono)] transition-colors duration-300"
           variants={itemVariants}
@@ -126,7 +119,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           Based in Kuala Lumpur, Malaysia 🇲🇾
         </motion.p>
 
-        {/* Glassmorphism Button - Centered above buttons container */}
         <motion.div
           className="flex flex-col items-center justify-center w-full mt-6 mb-2"
           variants={itemVariants}
@@ -137,31 +129,18 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             className="mx-auto"
             borderColor={subtitleBorderColor}
             onClick={() => {
-              let el = document.getElementById('projects');
-              if (!el) {
-                el = document.querySelector('.portfolio-section');
-              }
-              if (el) {
-                if (el instanceof HTMLAnchorElement && el.href) {
-                  window.location.href = el.href;
-                } else {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                }
-              } else {
-                window.location.hash = '#projects';
-              }
+              const el = document.getElementById('projects');
+              el?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
             Explore my Work
           </GlassmorphismButton>
         </motion.div>
 
-        {/* Buttons Container - Item */}
         <motion.div
           className="flex gap-4 mt-10 items-center"
           variants={itemVariants}
         >
-          {/* Resume/CV Button (Borderless with Animated Underline) */}
           <motion.a
             href="/files/Resume_DarranceBehHengShek_Mar2025.pdf"
             download
@@ -176,13 +155,11 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           >
             <FiDownload className="w-4 h-4" />
             <span>Resume/CV</span>
-            {/* Animated Underline Span */}
             <motion.span
               className="absolute bottom-0 left-0 right-0 h-px bg-gray-100 origin-center transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
           </motion.a>
 
-          {/* LinkedIn Button (Kept Bordered Design) */}
           <motion.a
             href="https://linkedin.com/in/darrancebeh"
             target="_blank"
@@ -200,58 +177,24 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         </motion.div>
       </motion.main>
 
-      {/* Footer (Has its own animation) */}
       <footer className="absolute bottom-8 left-0 right-0 w-full z-10 px-4">
-        {/* Social Icons - Hidden on mobile (default), shown from sm breakpoint up */}
         <motion.div
           className="hidden sm:flex justify-center gap-6 mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
         >
-          <motion.a
-            href="https://github.com/darrancebeh"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="text-gray-500 transition-colors duration-300 hover:text-gray-300"
-            whileHover={{ scale: 1.2, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.15 }}
-            onMouseEnter={handleMouseEnterInteractive}
-            onMouseLeave={handleMouseEnterInteractive}
-          >
+          <motion.a href="https://github.com/darrancebeh" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="text-gray-500 transition-colors duration-300 hover:text-gray-300" whileHover={{ scale: 1.2, y: -2 }} whileTap={{ scale: 0.9 }} transition={{ duration: 0.15 }} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseEnterInteractive} >
             <FiGithub className="w-6 h-6" />
           </motion.a>
-          <motion.a
-            href="https://x.com/quant_in_my"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X Profile"
-            className="text-gray-500 transition-colors duration-300 hover:text-gray-300"
-            whileHover={{ scale: 1.2, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.15 }}
-            onMouseEnter={handleMouseEnterInteractive}
-            onMouseLeave={handleMouseEnterInteractive}
-          >
+          <motion.a href="https://x.com/quant_in_my" target="_blank" rel="noopener noreferrer" aria-label="X Profile" className="text-gray-500 transition-colors duration-300 hover:text-gray-300" whileHover={{ scale: 1.2, y: -2 }} whileTap={{ scale: 0.9 }} transition={{ duration: 0.15 }} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseEnterInteractive} >
             <FiTwitter className="w-6 h-6" />
           </motion.a>
-          <motion.a
-            href="mailto:darrancebeh@gmail.com"
-            aria-label="Send Email"
-            className="text-gray-500 transition-colors duration-300 hover:text-gray-300"
-            whileHover={{ scale: 1.2, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.15 }}
-            onMouseEnter={handleMouseEnterInteractive}
-            onMouseLeave={handleMouseEnterInteractive}
-          >
+          <motion.a href="mailto:darrancebeh@gmail.com" aria-label="Send Email" className="text-gray-500 transition-colors duration-300 hover:text-gray-300" whileHover={{ scale: 1.2, y: -2 }} whileTap={{ scale: 0.9 }} transition={{ duration: 0.15 }} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseEnterInteractive} >
             <FiMail className="w-6 h-6" />
           </motion.a>
         </motion.div>
 
-        {/* Info Text */}
         <motion.div
           className="text-center text-xs text-gray-600 space-y-1"
           initial={{ opacity: 0 }}
