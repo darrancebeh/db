@@ -1,13 +1,13 @@
 "use client";
 import "./LandingPage.css";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
+import AnimatedSubtitle from "./AnimatedSubtitle";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 import { Dispatch, SetStateAction } from 'react';
 import GlassmorphismButton from "./GlassmorphismButton";
-import AnimatedSubtitle from "./AnimatedSubtitle";
 import { getColorForTitle } from "../utils/colorTransitions";
+import { motion } from "framer-motion";
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
@@ -49,13 +49,12 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
   const subtitleTitles = ["Protocol Engineer", "Quantitative Analyst", "Systems Architect"];
   const subtitleColor = getColorForTitle(subtitleTitles[currentSubtitleIndex]).border;
 
-  // Track current subtitle color for GlassmorphismButton
-  const [subtitleBorderColor, setSubtitleBorderColor] = useState(getColorForTitle("Protocol Engineer").border);
-
-  // Handler for subtitle color change
-  const handleSubtitleColorChange = (colors: { particle: string; text: string; border: string }) => {
-    setSubtitleBorderColor(colors.border);
-  };
+  // Track subtitle colors for transitions
+  const [subtitleColors, setSubtitleColors] = useState({
+    particle: "#9ca3af",
+    text: "#fff",
+    border: "#60a5fa",
+  });
 
   return (
     <section
@@ -63,8 +62,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
       onMouseEnter={handleMouseEnterInteractive}
       onMouseLeave={handleMouseLeaveDefault}
     >
-      <NetworkBackground />
-
+      <NetworkBackground particleColor={subtitleColors.particle} />
       {/* Main Content - Container for staggered animation */}
       <motion.main
         className="flex flex-col items-center gap-4 z-10 relative"
@@ -110,7 +108,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         >
           <AnimatedSubtitle
             className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12"
-            onColorChange={handleSubtitleColorChange}
+            onColorChange={setSubtitleColors}
           />
         </motion.div>
 
@@ -135,7 +133,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseEnterInteractive}
             className="mx-auto"
-            borderColor={subtitleBorderColor}
+            borderColor={subtitleColors.border}
             onClick={() => {
               let el = document.getElementById('projects');
               if (!el) {

@@ -4,7 +4,12 @@ import Particles from "react-tsparticles";
 import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 
-const NetworkBackground = () => {
+// Accept a color prop for dynamic particle color
+interface NetworkBackgroundProps {
+  particleColor?: string;
+}
+
+const NetworkBackground: React.FC<NetworkBackgroundProps> = ({ particleColor = "#9ca3af" }) => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
@@ -32,7 +37,7 @@ const NetworkBackground = () => {
           size: 8.5,
           duration: 3,
           opacity: 0.8,
-          color: "#ffffff",
+          color: particleColor,
         },
 
         connect: {
@@ -51,10 +56,10 @@ const NetworkBackground = () => {
     },
     particles: {
       color: {
-        value: "#9ca3af",
+        value: particleColor,
       },
       links: {
-        color: "#6b7280",
+        color: particleColor,
         distance: 150,
         enable: true,
         opacity: 0.1,
