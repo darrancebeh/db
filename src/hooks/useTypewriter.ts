@@ -29,12 +29,12 @@ export const useTypewriter = ({
 
   useEffect(() => {
     const currentWord = words[currentWordIndex];
-    
-    const timeout = setTimeout(() => {
-      if (isDeleting) {
-        // Delete characters
+    let timeout: NodeJS.Timeout;
+    let delayTimeout: NodeJS.Timeout;
+
+    if (isDeleting) {
+      timeout = setTimeout(() => {
         setCurrentText(currentWord.substring(0, currentText.length - 1));
-        
         if (currentText === '') {
           setIsDeleting(false);
           setCurrentWordIndex((prev) => {
@@ -50,21 +50,26 @@ export const useTypewriter = ({
             return nextIndex;
           });
         }
+      }, deleteSpeed);
+    } else {
+      if (currentText !== currentWord) {
+        timeout = setTimeout(() => {
+          setCurrentText(currentWord.substring(0, currentText.length + 1));
+        }, typeSpeed);
       } else {
-        // Type characters
-        setCurrentText(currentWord.substring(0, currentText.length + 1));
-        
-        if (currentText === currentWord) {
-          if (loop || currentWordIndex < words.length - 1) {
-            setTimeout(() => setIsDeleting(true), delayBetweenWords);
-          } else {
-            setIsComplete(true);
-          }
+        // Only set deleting after delayBetweenWords, and only if not already deleting
+        if (!isDeleting) {
+          delayTimeout = setTimeout(() => {
+            setIsDeleting(true);
+          }, delayBetweenWords);
         }
       }
-    }, isDeleting ? deleteSpeed : typeSpeed);
+    }
 
-    return () => clearTimeout(timeout);
+    return () => {
+      if (timeout) clearTimeout(timeout);
+      if (delayTimeout) clearTimeout(delayTimeout);
+    };
   }, [currentText, currentWordIndex, isDeleting, words, typeSpeed, deleteSpeed, delayBetweenWords, loop]);
 
   return {
