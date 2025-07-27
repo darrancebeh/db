@@ -12,7 +12,7 @@ export const colorScheme = {
     border: '#c4b5fd',
     name: 'purple'
   },
-  'Aspiring Founder-Entrepreneur': {
+  'Future Founder-Entrepreneur': {
     particle: '#ec4899',
     text: '#f472b6',
     border: '#f9a8d4',
@@ -55,4 +55,4 @@ export const interpolateColor = (color1: string, color2: string, factor: number)
 };
 
 // Get title array for cycling
-export const titleArray: TitleKey[] = ['Web3 DeFi Protocol Engineer', 'US Market & Crypto Quant', 'Aspiring Founder-Entrepreneur'];
+export const titleArray: TitleKey[] = ['Web3 DeFi Protocol Engineer', 'US Market & Crypto Quant', 'Future Founder-Entrepreneur'];
