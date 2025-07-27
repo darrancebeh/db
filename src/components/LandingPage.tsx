@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 import { Dispatch, SetStateAction } from 'react';
+import GlassmorphismButton from "./GlassmorphismButton";
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
@@ -44,9 +45,8 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
   return (
     <section
       className="relative flex flex-col items-center justify-center min-h-screen p-8 font-[family-name:var(--font-geist-sans)] text-center overflow-hidden bg-gradient-animate"
-      // Apply default cursor logic to the whole section
-      onMouseEnter={handleMouseEnterInteractive} // Set interactive when entering section
-      onMouseLeave={handleMouseLeaveDefault}   // Reset to default when leaving section
+      onMouseEnter={handleMouseEnterInteractive}
+      onMouseLeave={handleMouseLeaveDefault}
     >
       <NetworkBackground />
 
@@ -58,7 +58,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         animate="visible"
       >
         {/* Alias - Item */}
-         <motion.span
+        <motion.span
           className="text-8xl font-extrabold tracking-tighter text-gray-500 font-[family-name:var(--font-geist-mono)] mb-2 transition-colors duration-300"
           variants={itemVariants}
           whileHover={{
@@ -67,9 +67,8 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             textShadow: "0 0 8px rgba(229, 231, 235, 0.3)",
           }}
           transition={{ duration: 0.2 }}
-          // Keep interactive cursor while hovering this specific element
           onMouseEnter={handleMouseEnterInteractive}
-          onMouseLeave={handleMouseEnterInteractive} // Keep interactive if mouse moves off to another interactive element within section
+          onMouseLeave={handleMouseEnterInteractive}
         >
           db
         </motion.span>
@@ -78,7 +77,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         <motion.h1
           className="text-6xl font-medium tracking-tight text-gray-100 transition-colors duration-300"
           variants={itemVariants}
-           whileHover={{
+          whileHover={{
             color: "#ffffff",
             scale: 1.03,
           }}
@@ -95,7 +94,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           variants={itemVariants}
           whileHover={{ color: "#b0b0b0" }}
           transition={{ duration: 0.2 }}
-          // These non-button elements can revert to the section's default (interactive)
           onMouseEnter={handleMouseEnterInteractive}
           onMouseLeave={handleMouseEnterInteractive}
         >
@@ -106,13 +104,45 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         <motion.p
           className="mt-2 text-lg text-gray-600 font-[family-name:var(--font-geist-mono)] transition-colors duration-300"
           variants={itemVariants}
-           whileHover={{ color: "#9ca3af" }}
-           transition={{ duration: 0.2 }}
-           onMouseEnter={handleMouseEnterInteractive}
-           onMouseLeave={handleMouseEnterInteractive}
+          whileHover={{ color: "#9ca3af" }}
+          transition={{ duration: 0.2 }}
+          onMouseEnter={handleMouseEnterInteractive}
+          onMouseLeave={handleMouseEnterInteractive}
         >
           Based in Kuala Lumpur, Malaysia 🇲🇾
         </motion.p>
+
+        {/* Glassmorphism Button - Centered above buttons container */}
+        <motion.div
+          className="flex flex-col items-center justify-center w-full mt-6 mb-2"
+          variants={itemVariants}
+        >
+          <GlassmorphismButton
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseEnterInteractive}
+            className="mx-auto"
+            onClick={() => {
+              // Try both 'projects' and 'portfolio-section' for scroll target
+              let el = document.getElementById('projects');
+              if (!el) {
+                el = document.querySelector('.portfolio-section');
+              }
+              if (el) {
+                // If projects is on another page, redirect
+                if (el instanceof HTMLAnchorElement && el.href) {
+                  window.location.href = el.href;
+                } else {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              } else {
+                // Fallback: try window.location.hash
+                window.location.hash = '#projects';
+              }
+            }}
+          >
+            Explore Tech Stack
+          </GlassmorphismButton>
+        </motion.div>
 
         {/* Buttons Container - Item */}
         <motion.div
@@ -124,8 +154,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             href="/files/Resume_DarranceBehHengShek_Mar2025.pdf"
             download
             target="_blank"
-            rel="noopener noreferrer" 
-            // Added relative and group classes
+            rel="noopener noreferrer"
             className="relative group inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 rounded-md shadow-sm transition-colors duration-300 hover:text-gray-100"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -146,7 +175,6 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             href="https://linkedin.com/in/darrancebeh"
             target="_blank"
             rel="noopener noreferrer"
-            // Kept border and hover background
             className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-gray-300 border border-gray-600 rounded-md shadow-sm transition-colors duration-300 hover:border-gray-400 hover:text-gray-100 hover:bg-gray-700"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -164,12 +192,12 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
       <footer className="absolute bottom-8 left-0 right-0 w-full z-10 px-4">
         {/* Social Icons - Hidden on mobile (default), shown from sm breakpoint up */}
         <motion.div
-          className="hidden sm:flex justify-center gap-6 mb-6" // Added hidden and sm:flex
+          className="hidden sm:flex justify-center gap-6 mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }} // Delayed fade-in
+          transition={{ delay: 0.8, duration: 0.5 }}
         >
-           <motion.a
+          <motion.a
             href="https://github.com/darrancebeh"
             target="_blank"
             rel="noopener noreferrer"
