@@ -55,4 +55,4 @@ export const interpolateColor = (color1: string, color2: string, factor: number)
 };
 
 // Get title array for cycling
-export const titleArray: TitleKey[] = ['Web3 DeFi Protocol Engineer', 'US Market & Crypto Quant', 'Entrepreneur & Aspiring Founder'];
+export const titleArray: TitleKey[] = ['Web3 DeFi Protocol Engineer', 'US Market & Crypto Quant', 'Aspiring Founder-Entrepreneur'];
