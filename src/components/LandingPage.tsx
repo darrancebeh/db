@@ -6,6 +6,7 @@ import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 import { Dispatch, SetStateAction } from 'react';
 import GlassmorphismButton from "./GlassmorphismButton";
+import AnimatedSubtitle from "./AnimatedSubtitle";
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
@@ -89,16 +90,12 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         </motion.h1>
 
         {/* Subtitle - Item */}
-        <motion.p
-          className="mt-4 text-xl text-gray-400 font-[family-name:var(--font-geist-mono)] transition-colors duration-300"
+        <motion.div
+          className="mt-4 w-full flex justify-center"
           variants={itemVariants}
-          whileHover={{ color: "#b0b0b0" }}
-          transition={{ duration: 0.2 }}
-          onMouseEnter={handleMouseEnterInteractive}
-          onMouseLeave={handleMouseEnterInteractive}
         >
-          AI & Machine Learning | Big Data & Data Science | Cybersecurity
-        </motion.p>
+          <AnimatedSubtitle className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12" />
+        </motion.div>
 
         {/* Location - Item */}
         <motion.p
