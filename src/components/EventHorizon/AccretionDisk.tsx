@@ -1,12 +1,11 @@
 // src/components/EventHorizon/AccretionDisk.tsx
 
 "use client";
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { HorizonVisualParams } from '@/types/marketData'; // Import the new type
+import { HorizonVisualParams } from '@/types/marketData';
 
-// --- MODIFIED: The vertex shader is unchanged ---
 const vertexShader = `
   varying vec2 vUv;
   void main() {
@@ -15,12 +14,12 @@ const vertexShader = `
   }
 `;
 
-// --- MODIFIED: The fragment shader now has new uniforms ---
+// --- CORRECTED FRAGMENT SHADER ---
 const fragmentShader = `
   uniform float uTime;
-  uniform vec3 uColor;         // NEW: For the disk's base color
-  uniform float uVelocity;      // NEW: For animation speed
-  uniform float uTurbulence;    // NEW: For noise intensity
+  uniform vec3 uColor;
+  uniform float uVelocity;
+  uniform float uTurbulence;
 
   varying vec2 vUv;
 
@@ -40,30 +39,31 @@ const fragmentShader = `
   }
 
   void main() {
-    // Velocity now controls the overall speed of the animation
     float time = uTime * uVelocity * 0.2;
-    
-    float d = distance(vUv, vec2(0.5));
-    float mask = smoothstep(0.5, 0.48, d) * smoothstep(0.25, 0.27, d);
 
-    // Turbulence now controls the intensity of the noise effect
-    float turbulence = noise(vUv * 5.0 - time) * uTurbulence;
-    turbulence += noise(vUv * 10.0 + time) * 0.5 * uTurbulence;
+    // The UV-based radial mask logic is correct.
+    float radialMask = pow(1.0 - vUv.x, 2.0);
 
-    float angle = atan(vUv.y - 0.5, vUv.x - 0.5);
-    float streaks = sin(angle * 15.0 - time * 3.0) * 0.1 + 0.9;
+    float baseNoise = noise(vUv * 2.0 - time);
+    baseNoise += noise(vUv * 4.0 + time) * 0.5;
+    float turbulence = pow(baseNoise, 1.5) * (uTurbulence + 0.5);
+
+    // --- SYNTAX CORRECTION ---
+    // The constant for PI must be a float literal in GLSL.
+    // The previous JavaScript syntax was invalid.
+    float angle = vUv.y * 2.0 * 3.14159265359;
+    float streaks = sin(angle * 5.0 - time * 1.5) * 0.05 + 0.95;
     
     float finalNoise = turbulence * streaks;
-    
-    // The base color is now controlled by the uColor uniform
-    vec3 color = uColor * finalNoise;
-    float alpha = finalNoise * mask;
+    float remappedNoise = smoothstep(0.1, 0.8, finalNoise);
+
+    vec3 color = uColor * remappedNoise;
+    float alpha = remappedNoise * radialMask;
 
     gl_FragColor = vec4(color, alpha);
   }
 `;
 
-// --- MODIFIED: The component now accepts props ---
 interface AccretionDiskProps {
   visualParams: HorizonVisualParams;
 }
@@ -71,18 +71,13 @@ interface AccretionDiskProps {
 const AccretionDisk: React.FC<AccretionDiskProps> = ({ visualParams }) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const meshRef = useRef<THREE.Mesh>(null);
-
-  // --- NEW: Memoize the color object for efficient updates ---
   const diskColorObject = useMemo(() => new THREE.Color(), []);
 
   useFrame(({ clock }, delta) => {
     if (meshRef.current) {
-      // The disk's orbital rotation speed is now driven by the velocity prop
       meshRef.current.rotation.z += delta * visualParams.diskVelocity * 0.1;
     }
-
     if (materialRef.current) {
-      // Update all uniforms on every frame with the latest prop values
       materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
       materialRef.current.uniforms.uColor.value.set(diskColorObject.set(visualParams.diskColor));
       materialRef.current.uniforms.uVelocity.value = visualParams.diskVelocity;
@@ -90,11 +85,9 @@ const AccretionDisk: React.FC<AccretionDiskProps> = ({ visualParams }) => {
     }
   });
   
-  // Memoize the shader arguments to avoid re-creation
   const shaderArgs = useMemo(() => ({
     uniforms: {
       uTime: { value: 0 },
-      // Initialize the new uniforms
       uColor: { value: new THREE.Color(visualParams.diskColor) },
       uVelocity: { value: visualParams.diskVelocity },
       uTurbulence: { value: visualParams.diskTurbulence },
@@ -104,11 +97,11 @@ const AccretionDisk: React.FC<AccretionDiskProps> = ({ visualParams }) => {
     transparent: true,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
-  }), [visualParams.diskColor, visualParams.diskVelocity, visualParams.diskTurbulence]); // Re-create if initial values change
+  }), [visualParams.diskColor, visualParams.diskVelocity, visualParams.diskTurbulence]);
 
   return (
     <mesh ref={meshRef} rotation-x={-Math.PI / 2.2}>
-      <ringGeometry args={[1.5, 3.5, 128]} />
+      <ringGeometry args={[1.1, 2.5, 128]} />
       <shaderMaterial ref={materialRef} args={[shaderArgs]} />
     </mesh>
   );
