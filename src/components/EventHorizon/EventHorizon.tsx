@@ -4,8 +4,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Singularity from './Singularity';
+import DynamicStars from './DynamicStars';
 import AccretionDisk from './AccretionDisk';
-import DynamicStars from './DynamicStars'; // Import our new component
 
 interface EventHorizonProps {
   starColor: string;
@@ -25,7 +25,10 @@ const EventHorizon: React.FC<EventHorizonProps> = ({ starColor }) => {
   return (
     <div className="absolute top-0 left-0 w-full h-full z-10">
       <Canvas
-        camera={{ fov: 75, position: [0, 0, 5] }}
+        // --- MODIFICATION ---
+        // Changed the camera position to be above the scene, looking down at an angle.
+        // position: [X, Y, Z] -> We are now higher on the Y-axis.
+        camera={{ fov: 75, position: [0, 4, 5] }}
         dpr={[1, 2]}
         style={{ background: '#020203' }}
       >
