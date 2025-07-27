@@ -1,12 +1,13 @@
 "use client";
 import "./LandingPage.css";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import NetworkBackground from "./NetworkBackground";
 import { FiDownload, FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi";
 import { Dispatch, SetStateAction } from 'react';
 import GlassmorphismButton from "./GlassmorphismButton";
 import AnimatedSubtitle from "./AnimatedSubtitle";
+import { getColorForTitle } from "../utils/colorTransitions";
 
 // Define the possible cursor variants type (can be imported from page.tsx if needed)
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
@@ -42,6 +43,19 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
   // Define handlers using setCursorVariant
   const handleMouseEnterInteractive = () => setCursorVariant('interactive');
   const handleMouseLeaveDefault = () => setCursorVariant('default');
+
+  // Track current subtitle index for color
+  const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
+  const subtitleTitles = ["Protocol Engineer", "Quantitative Analyst", "Systems Architect"];
+  const subtitleColor = getColorForTitle(subtitleTitles[currentSubtitleIndex]).border;
+
+  // Track current subtitle color for GlassmorphismButton
+  const [subtitleBorderColor, setSubtitleBorderColor] = useState(getColorForTitle("Protocol Engineer").border);
+
+  // Handler for subtitle color change
+  const handleSubtitleColorChange = (colors: { particle: string; text: string; border: string }) => {
+    setSubtitleBorderColor(colors.border);
+  };
 
   return (
     <section
@@ -94,7 +108,10 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
           className="mt-4 w-full flex justify-center"
           variants={itemVariants}
         >
-          <AnimatedSubtitle className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12" />
+          <AnimatedSubtitle
+            className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12"
+            onColorChange={handleSubtitleColorChange}
+          />
         </motion.div>
 
         {/* Location - Item */}
@@ -118,21 +135,19 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseEnterInteractive}
             className="mx-auto"
+            borderColor={subtitleBorderColor}
             onClick={() => {
-              // Try both 'projects' and 'portfolio-section' for scroll target
               let el = document.getElementById('projects');
               if (!el) {
                 el = document.querySelector('.portfolio-section');
               }
               if (el) {
-                // If projects is on another page, redirect
                 if (el instanceof HTMLAnchorElement && el.href) {
                   window.location.href = el.href;
                 } else {
                   el.scrollIntoView({ behavior: 'smooth' });
                 }
               } else {
-                // Fallback: try window.location.hash
                 window.location.hash = '#projects';
               }
             }}
