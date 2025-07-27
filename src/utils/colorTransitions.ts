@@ -1,18 +1,18 @@
 // Color scheme for different professional titles
 export const colorScheme = {
-  'Protocol Engineer': {
+  'Web3 DeFi Protocol Engineer': {
     particle: '#3b82f6',
     text: '#60a5fa',
     border: '#93c5fd',
     name: 'blue'
   },
-  'Quantitative Analyst': {
+  'US Market & Crypto Retail Quant': {
     particle: '#8b5cf6',
     text: '#a78bfa',
     border: '#c4b5fd',
     name: 'purple'
   },
-  'Systems Architect': {
+  'Entrepreneur & Aspiring Co-/Founder': {
     particle: '#ec4899',
     text: '#f472b6',
     border: '#f9a8d4',
@@ -24,7 +24,7 @@ export type TitleKey = keyof typeof colorScheme;
 
 // Get color for a specific title
 export const getColorForTitle = (title: string) => {
-  return colorScheme[title as TitleKey] || colorScheme['Protocol Engineer'];
+  return colorScheme[title as TitleKey] || colorScheme['Web3 DeFi Protocol Engineer'];
 };
 
 // Interpolate between two RGB colors
@@ -55,4 +55,4 @@ export const interpolateColor = (color1: string, color2: string, factor: number)
 };
 
 // Get title array for cycling
-export const titleArray: TitleKey[] = ['Protocol Engineer', 'Quantitative Analyst', 'Systems Architect'];
+export const titleArray: TitleKey[] = ['Web3 DeFi Protocol Engineer', 'US Market & Crypto Retail Quant', 'Entrepreneur & Aspiring Co-/Founder'];

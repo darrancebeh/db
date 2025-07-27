@@ -46,11 +46,11 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
 
   // Track current subtitle index for color
   const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
-  const subtitleTitles = ["Protocol Engineer", "Quantitative Analyst", "Systems Architect"];
+  const subtitleTitles = ["Web3 DeFi Protocol Engineer", "US Market & Crypto Retail Quant", "Entrepreneur & Aspiring Co-/Founder"];
   const subtitleColor = getColorForTitle(subtitleTitles[currentSubtitleIndex]).border;
 
   // Track current subtitle color for GlassmorphismButton
-  const [subtitleBorderColor, setSubtitleBorderColor] = useState(getColorForTitle("Protocol Engineer").border);
+  const [subtitleBorderColor, setSubtitleBorderColor] = useState(getColorForTitle("Web3 DeFi Protocol Engineer").border);
 
   // Handler for subtitle color change
   const handleSubtitleColorChange = (colors: { particle: string; text: string; border: string }) => {
@@ -152,7 +152,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
               }
             }}
           >
-            Explore Tech Stack
+            Explore my Work
           </GlassmorphismButton>
         </motion.div>
 
