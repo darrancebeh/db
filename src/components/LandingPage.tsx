@@ -99,11 +99,11 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         </motion.h1>
 
         <motion.div
-          className="mt-4 w-full flex justify-center"
+          className="mt-4 w-full flex justify-center whitespace-nowrap"
           variants={itemVariants}
         >
           <AnimatedSubtitle
-            className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12"
+            className="text-2xl md:text-4xl lg:text-5xl font-medium font-[family-name:var(--font-geist-mono)] transition-colors duration-300 tracking-wide md:tracking-wider lg:tracking-widest px-2 md:px-6 lg:px-12 whitespace-nowrap"
             onColorChange={handleSubtitleColorChange}
           />
         </motion.div>
@@ -196,7 +196,7 @@ export default function LandingPage({ setCursorVariant }: LandingPageProps) {
         </motion.div>
 
         <motion.div
-          className="text-center text-xs text-gray-600 space-y-1"
+          className="hidden sm:block text-center text-xs text-gray-600 space-y-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.5 }}
