@@ -64,7 +64,6 @@ export const useTypewriter = ({
     // This effect ONLY handles the character-by-character animation
     const handleTyping = () => {
       const currentWord = words[stateRef.current.wordIndex];
-      const speed = stateRef.current.isDeleting ? deleteSpeed : typeSpeed;
       
       // Update the text based on typing or deleting state
       const newText = stateRef.current.isDeleting
