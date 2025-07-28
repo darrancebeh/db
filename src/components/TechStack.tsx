@@ -17,7 +17,6 @@ import { FaReact, FaGitAlt } from "react-icons/fa";
 
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
-// This interface was duplicated, using the one with the correct props.
 interface TechStackProps {
   setCursorVariant: (variant: CursorVariant) => void;
   onMouseEnterInteractive?: () => void;
@@ -52,9 +51,9 @@ const itemVariants = {
 // Curated tech stack data
 const techStackData = [
   { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "Solidity", Icon: SiSolidity, color: "#363636" },
+  { name: "Solidity", Icon: SiSolidity, color: "#AAAAAA" },
+  { name: "Rust", Icon: SiRust, color: "#F74C00" },
   { name: "React", Icon: FaReact, color: "#61DAFB" },
-  {name: "Rust", Icon: SiRust, color: "#F74C00"},
   { name: "PyTorch", Icon: SiPytorch, color: "#EE4C2C" },
   { name: "Pandas", Icon: SiPandas, color: "#5A5B9F" },
   { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
@@ -67,8 +66,7 @@ const techStackData = [
 
 export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInteractive }: TechStackProps) {
   return (
-    // --- CORRECTION 2: Removed `overflow-hidden` ---
-    <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate">
+    <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden">
       <motion.div
         className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
         animate={{ x: [-25, 25, -25], y: [-15, 15, -15], rotate: [0, 180, 360] }}
@@ -88,41 +86,68 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
       <motion.h2
         className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 mb-10 sm:mb-14 lg:mb-18 text-center"
         initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }} // This is fine for a single element
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, type: "spring", stiffness: 50 }}
       >
         My Tech Stack
       </motion.h2>
 
-      {/* --- CORRECTION 1: Corrected Framer Motion props --- */}
       <motion.div
         className="relative z-10 flex flex-wrap justify-center items-center gap-4 sm:gap-6 w-full max-w-6xl"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible" // Use the variant name string, not an object
-        viewport={{ once: true, amount: 0.2 }} // amount ensures animation triggers when 20% is visible
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
       >
-        {techStackData.map((tech) => {
-          const hoverState = {
-            y: -8,
-            scale: 1.05,
-            boxShadow: `0 20px 30px -10px rgba(0,0,0,0.3)`,
-            borderColor: tech.color || 'rgba(255, 255, 255, 0.4)',
-          };
-
-          return (
+        {techStackData.map((tech) => (
+          <motion.div
+            key={tech.name}
+            variants={itemVariants}
+            className="relative p-4 sm:p-5 rounded-2xl w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 overflow-hidden group backdrop-blur-lg" // Slightly increased blur
+            // --- MODIFIED: Base styles for a clearer glass effect ---
+            style={{
+              // The background is now fully transparent.
+              background: 'transparent', 
+              // The inset shadow and border are now the primary visual elements.
+              boxShadow: `0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.1)`, 
+              border: '1px solid rgba(255, 255, 255, 0.18)', 
+            }}
+            whileHover={{
+              scale: 1.05,
+              y: -8,
+              rotateX: 10,
+              // Hover shadow is now slightly more pronounced
+              boxShadow: `0 25px 40px rgba(0, 0, 0, 0.5), 0 0 30px ${tech.color}40, inset 0 1px 1px rgba(255, 255, 255, 0.2)`,
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+            onMouseEnter={onMouseEnterInteractive}
+            onMouseLeave={onMouseLeaveInteractive}
+          >
+            {/* The rest of the card's internal structure remains the same */}
             <motion.div
-              key={tech.name}
-              className="flex flex-col items-center justify-center p-4 sm:p-5 rounded-xl shadow-lg aspect-square w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36
-                         bg-black/20 backdrop-blur-sm 
-                         border border-white/20 
-                         transition-colors duration-300"
-              variants={itemVariants}
-              whileHover={hoverState}
-              onMouseEnter={onMouseEnterInteractive}
-              onMouseLeave={onMouseLeaveInteractive}
-            >
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+              style={{
+                background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)`,
+              }}
+            />
+            <motion.div
+              className="absolute top-0 left-0 opacity-0 group-hover:opacity-100"
+              initial={{ x: '-100%', skewX: -20 }}
+              whileHover={{
+                x: '100%',
+                transition: { duration: 1.2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1, delay: 0.2 }
+              }}
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+                width: '50%',
+                height: '100%',
+              }}
+            />
+            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
               <tech.Icon
                 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 lg:w-14 mb-2 sm:mb-3"
                 style={{ color: tech.color || "#9ca3af" }}
@@ -130,9 +155,16 @@ export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInterac
               <h3 className="text-sm sm:text-base font-semibold text-gray-200 text-center">
                 {tech.name}
               </h3>
-            </motion.div>
-          );
-        })}
+            </div>
+            <motion.div
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+              style={{
+                border: `2px solid ${tech.color}`,
+                filter: `drop-shadow(0 0 15px ${tech.color}60)`,
+              }}
+            />
+          </motion.div>
+        ))}
       </motion.div>
     </section>
   );
