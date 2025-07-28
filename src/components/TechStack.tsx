@@ -3,27 +3,24 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   SiFigma,
-  SiTensorflow,
   SiPytorch,
   SiScikitlearn,
   SiPandas,
-  SiNumpy,
   SiHuggingface,
-  SiTableau,
-  SiExpress,
   SiDjango,
-  SiTailwindcss,
   SiPostgresql,
   SiTypescript,
+  SiSolidity,
+  SiRust,
 } from "react-icons/si";
-import { FaReact, FaGitAlt, FaPython } from "react-icons/fa";
-import { TbMathFunction } from "react-icons/tb";
-import { BiLineChart } from "react-icons/bi";
+import { FaReact, FaGitAlt } from "react-icons/fa";
 
 type CursorVariant = 'default' | 'interactive' | 'lightArea';
 
 interface TechStackProps {
   setCursorVariant: (variant: CursorVariant) => void;
+  onMouseEnterInteractive?: () => void;
+  onMouseLeaveInteractive?: () => void;
 }
 
 // Define animation variants
@@ -51,140 +48,123 @@ const itemVariants = {
   },
 };
 
-
-// Tech stack data by category (Total 18 items)
+// Curated tech stack data
 const techStackData = [
-  // AI / ML / Data Science
-  { name: "TensorFlow", description: "AI/ML Framework", Icon: SiTensorflow, color: "#FF6F00" },
-  { name: "PyTorch", description: "AI/ML Framework", Icon: SiPytorch, color: "#EE4C2C" },
-  { name: "scikit-learn", description: "ML Algorithm Library", Icon: SiScikitlearn, color: "#F7931E" },
-  { name: "HuggingFace", description: "NLP Library", Icon: SiHuggingface, color: "#FFD21E" },
-  { name: "NLTK", description: "Natural Language Processing", Icon: FaPython, color: "#3776AB" },
-  { name: "Pandas", description: "Data Manipulation & Analysis", Icon: SiPandas, color: "#5A5B9F" },
-  { name: "NumPy", description: "Data Cleaning & Aggregation", Icon: SiNumpy, color: "#4D77CF" },
-  { name: "Tableau", description: "Data Visualization", Icon: SiTableau, color: "#E97627" },
-  { name: "Matplotlib", description: "Data Visualization", Icon: BiLineChart, color: "#11557c" },
-  { name: "QuantLib", description: "Quant Library", Icon: TbMathFunction, color: "#888888" },
-
-  // Backend & Language
-  { name: "Django", description: "Backend Development", Icon: SiDjango, color: "#44B78B" },
-  { name: "TypeScript", description: "The Better JavaScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "Express.js", description: "Backend Development", Icon: SiExpress, color: "#FFFFFF" },
-
-  // Frontend
-  { name: "React", description: "Frontend Development", Icon: FaReact, color: "#61DAFB" },
-  { name: "Tailwind", description: "CSS Framework", Icon: SiTailwindcss, color: "#06B6D4" },
-
-  // Database
-  { name: "PostgreSQL", description: "Relational Database", Icon: SiPostgresql, color: "#4169E1" },
-
-  // Tools
-  { name: "Git", description: "Version Control", Icon: FaGitAlt, color: "#F05032" },
-
-  // Design
-  { name: "Figma", description: "Design Tool", Icon: SiFigma, color: "#A259FF" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "Solidity", Icon: SiSolidity, color: "#AAAAAA" },
+  { name: "Rust", Icon: SiRust, color: "#F74C00" },
+  { name: "React", Icon: FaReact, color: "#61DAFB" },
+  { name: "PyTorch", Icon: SiPytorch, color: "#EE4C2C" },
+  { name: "Pandas", Icon: SiPandas, color: "#5A5B9F" },
+  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
+  { name: "scikit-learn", Icon: SiScikitlearn, color: "#F7931E" },
+  { name: "HuggingFace", Icon: SiHuggingface, color: "#FFD21E" },
+  { name: "Django", Icon: SiDjango, color: "#44B78B" },
+  { name: "Git", Icon: FaGitAlt, color: "#F05032" },
+  { name: "Figma", Icon: SiFigma, color: "#A259FF" },
 ];
-
-interface TechStackProps {
-  onMouseEnterInteractive?: () => void;
-  onMouseLeaveInteractive?: () => void;
-}
-
-
 
 export default function TechStack({ onMouseEnterInteractive, onMouseLeaveInteractive }: TechStackProps) {
   return (
     <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24 bg-gradient-animate overflow-hidden">
       <motion.div
         className="absolute top-[20%] left-[20%] w-40 h-40 bg-blue-500/20 rounded-full filter blur-xl"
-        animate={{
-          x: [-25, 25, -25],
-          y: [-15, 15, -15],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 25,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "loop",
-        }}
+        animate={{ x: [-25, 25, -25], y: [-15, 15, -15], rotate: [0, 180, 360] }}
+        transition={{ duration: 25, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
       />
       <motion.div
         className="absolute bottom-[20%] right-[20%] w-48 h-48 bg-purple-500/20 rounded-xl filter blur-2xl"
-        animate={{
-          x: [35, -35, 35],
-          y: [20, -20, 20],
-          rotate: [0, -180, -360],
-        }}
-        transition={{
-          duration: 30,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "loop",
-          delay: 5,
-        }}
+        animate={{ x: [35, -35, 35], y: [20, -20, 20], rotate: [0, -180, -360] }}
+        transition={{ duration: 30, ease: "easeInOut", repeat: Infinity, repeatType: "loop", delay: 5 }}
       />
        <motion.div
         className="absolute top-[30%] right-[15%] w-32 h-32 bg-pink-500/15 rounded-full filter blur-lg"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.9, 0.6, 0.9],
-        }}
-        transition={{
-          duration: 20,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "loop",
-          delay: 2,
-        }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.9, 0.6, 0.9] }}
+        transition={{ duration: 20, ease: "easeInOut", repeat: Infinity, repeatType: "loop", delay: 2 }}
       />
 
       <motion.h2
         className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 mb-10 sm:mb-14 lg:mb-18 text-center"
         initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6, type: "spring", stiffness: 50 }}
       >
         My Tech Stack
       </motion.h2>
 
       <motion.div
-        className="relative z-10 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6 w-full max-w-6xl"
+        className="relative z-10 flex flex-wrap justify-center items-center gap-4 sm:gap-6 w-full max-w-6xl"
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
       >
-        {techStackData.map((tech) => {
-          // Define the hover state dynamically
-          const hoverState = {
-            y: -5,
-            scale: 1.03,
-            boxShadow: `0 10px 20px rgba(0,0,0,0.3), 0 0 25px ${tech.color || 'rgba(156, 163, 175, 0.3)'}aa`,
-          };
-
-          return (
+        {techStackData.map((tech) => (
+          <motion.div
+            key={tech.name}
+            variants={itemVariants}
+            className="relative p-4 sm:p-5 rounded-2xl w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 overflow-hidden group backdrop-blur-lg" // Slightly increased blur
+            // --- MODIFIED: Base styles for a clearer glass effect ---
+            style={{
+              // The background is now fully transparent.
+              background: 'transparent', 
+              // The inset shadow and border are now the primary visual elements.
+              boxShadow: `0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.1)`, 
+              border: '1px solid rgba(255, 255, 255, 0.18)', 
+            }}
+            whileHover={{
+              scale: 1.05,
+              y: -8,
+              rotateX: 10,
+              // Hover shadow is now slightly more pronounced
+              boxShadow: `0 25px 40px rgba(0, 0, 0, 0.5), 0 0 30px ${tech.color}40, inset 0 1px 1px rgba(255, 255, 255, 0.2)`,
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+            onMouseEnter={onMouseEnterInteractive}
+            onMouseLeave={onMouseLeaveInteractive}
+          >
+            {/* The rest of the card's internal structure remains the same */}
             <motion.div
-              key={tech.name}
-              className="flex flex-col items-center justify-center p-4 sm:p-5 bg-gray-900/60 backdrop-blur-md border border-gray-700/50 rounded-xl shadow-lg aspect-square transition-colors duration-200 hover:bg-gray-800/70"
-              variants={itemVariants}
-              whileHover={hoverState}
-              onMouseEnter={onMouseEnterInteractive}
-              onMouseLeave={onMouseLeaveInteractive}
-            >
-              {/* Icon with dynamic colors */}
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+              style={{
+                background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)`,
+              }}
+            />
+            <motion.div
+              className="absolute top-0 left-0 opacity-0 group-hover:opacity-100"
+              initial={{ x: '-100%', skewX: -20 }}
+              whileHover={{
+                x: '100%',
+                transition: { duration: 1.2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1, delay: 0.2 }
+              }}
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+                width: '50%',
+                height: '100%',
+              }}
+            />
+            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
               <tech.Icon
                 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 lg:w-14 mb-2 sm:mb-3"
                 style={{ color: tech.color || "#9ca3af" }}
               />
-              <h3 className="text-xs sm:text-base md:text-lg font-semibold text-gray-100 text-center mb-1 sm:mb-1.5">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-200 text-center">
                 {tech.name}
               </h3>
-              <p className="text-[10px] sm:text-xs md:text-sm text-gray-400 text-center leading-tight">
-                {tech.description}
-              </p>
-            </motion.div>
-          );
-        })}
+            </div>
+            <motion.div
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+              style={{
+                border: `2px solid ${tech.color}`,
+                filter: `drop-shadow(0 0 15px ${tech.color}60)`,
+              }}
+            />
+          </motion.div>
+        ))}
       </motion.div>
     </section>
   );
