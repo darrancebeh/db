@@ -1,81 +1,87 @@
-import { useState, useEffect } from 'react';
+// useTypewriter.ts
+
+import { useState, useEffect, useRef } from 'react';
 
 interface UseTypewriterOptions {
   words: string[];
   typeSpeed?: number;
   deleteSpeed?: number;
-  delayBetweenWords?: number;
+  delayAfterType?: number;  // Renamed for clarity
+  delayAfterDelete?: number; // The new parameter
   loop?: boolean;
 }
 
 interface UseTypewriterReturn {
   displayText: string;
   currentWordIndex: number;
-  isDeleting: boolean;
-  isComplete: boolean;
 }
 
 export const useTypewriter = ({
   words,
-  typeSpeed = 100,
-  deleteSpeed = 50,
-  delayBetweenWords = 2000,
+  typeSpeed = 80,
+  deleteSpeed = 40,
+  delayAfterType = 1500,     // Default is now a more rhythmic 1.5 seconds
+  delayAfterDelete = 300,    // A short, 0.3 second pause after deleting
   loop = true,
 }: UseTypewriterOptions): UseTypewriterReturn => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const [displayText, setDisplayText] = useState('');
+
+  const stateRef = useRef({
+    isDeleting: false,
+    wordIndex: 0,
+    text: '',
+  });
 
   useEffect(() => {
-    const currentWord = words[currentWordIndex];
-    let timeout: NodeJS.Timeout;
-    let delayTimeout: NodeJS.Timeout;
-
-    if (isDeleting) {
-      timeout = setTimeout(() => {
-        setCurrentText(currentWord.substring(0, currentText.length - 1));
-        if (currentText === '') {
-          setIsDeleting(false);
-          setCurrentWordIndex((prev) => {
-            const nextIndex = prev + 1;
-            if (nextIndex >= words.length) {
-              if (loop) {
-                return 0;
-              } else {
-                setIsComplete(true);
-                return prev;
-              }
-            }
-            return nextIndex;
-          });
+    // This effect now ONLY handles the timeouts between states
+    if (stateRef.current.text === words[stateRef.current.wordIndex] && !stateRef.current.isDeleting) {
+      // Word is fully typed, wait then start deleting
+      const timeoutId = setTimeout(() => {
+        stateRef.current.isDeleting = true;
+      }, delayAfterType);
+      return () => clearTimeout(timeoutId);
+    }
+    
+    if (stateRef.current.text === '' && stateRef.current.isDeleting) {
+      // Word is fully deleted, wait then move to next word
+      const timeoutId = setTimeout(() => {
+        const nextWordIndex = (stateRef.current.wordIndex + 1);
+        if (nextWordIndex >= words.length && !loop) {
+          // Stop if not looping
+          return;
         }
-      }, deleteSpeed);
-    } else {
-      if (currentText !== currentWord) {
-        timeout = setTimeout(() => {
-          setCurrentText(currentWord.substring(0, currentText.length + 1));
-        }, typeSpeed);
-      } else {
-        // Only set deleting after delayBetweenWords, and only if not already deleting
-        if (!isDeleting) {
-          delayTimeout = setTimeout(() => {
-            setIsDeleting(true);
-          }, delayBetweenWords);
-        }
-      }
+        stateRef.current.wordIndex = loop ? nextWordIndex % words.length : nextWordIndex;
+        stateRef.current.isDeleting = false;
+        setCurrentWordIndex(stateRef.current.wordIndex);
+      }, delayAfterDelete);
+      return () => clearTimeout(timeoutId);
     }
 
-    return () => {
-      if (timeout) clearTimeout(timeout);
-      if (delayTimeout) clearTimeout(delayTimeout);
+  }, [displayText, delayAfterType, delayAfterDelete, words, loop]);
+
+  useEffect(() => {
+    // This effect ONLY handles the character-by-character animation
+    const handleTyping = () => {
+      const currentWord = words[stateRef.current.wordIndex];
+      const speed = stateRef.current.isDeleting ? deleteSpeed : typeSpeed;
+      
+      // Update the text based on typing or deleting state
+      const newText = stateRef.current.isDeleting
+        ? currentWord.substring(0, stateRef.current.text.length - 1)
+        : currentWord.substring(0, stateRef.current.text.length + 1);
+
+      stateRef.current.text = newText;
+      setDisplayText(newText);
     };
-  }, [currentText, currentWordIndex, isDeleting, words, typeSpeed, deleteSpeed, delayBetweenWords, loop]);
+
+    const typingInterval = setInterval(handleTyping, stateRef.current.isDeleting ? deleteSpeed : typeSpeed);
+
+    return () => clearInterval(typingInterval);
+  }, [deleteSpeed, typeSpeed, words]);
 
   return {
-    displayText: currentText,
+    displayText,
     currentWordIndex,
-    isDeleting,
-    isComplete,
   };
 };

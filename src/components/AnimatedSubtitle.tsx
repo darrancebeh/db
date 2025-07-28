@@ -13,11 +13,14 @@ const AnimatedSubtitle: React.FC<AnimatedSubtitleProps> = ({
   onColorChange, 
   className = "" 
 }) => {
+  // --- MODIFICATION ---
+  // Using the new, clearer prop names
   const { displayText, currentWordIndex } = useTypewriter({
     words: titleArray,
     typeSpeed: 80,
     deleteSpeed: 40,
-    delayBetweenWords: 2500,
+    delayAfterType: 1500,     // The pause after a word is typed
+    delayAfterDelete: 300,    // The new, short pause after a word is deleted
     loop: true,
   });
 
